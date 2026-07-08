@@ -1,7 +1,7 @@
 // ============================================================
 // שכבת הנתונים — פאזה 1: מתכונים סטטיים (SSG מושלם ל-SEO)
 // המתכונים לקוחים מחומרי SimpliiGood הרשמיים — כולם קרים (בלי חימום).
-// תמונות: image נשאר null עד שהקבצים עולים ל-public/recipes/ (מוצג placeholder).
+// תמונות: קבצי WebP ב-public/recipes/. פסטו עדיין null (placeholder) עד שתגיע תמונה.
 // בפאזה 2 השכבה הזו עוברת לטבלת recipes ב-Supabase — הטיפוס נשאר זהה.
 // ============================================================
 
@@ -43,7 +43,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מערבבים 2 קוביות היישר בתוך היוגורט — הן מתרככות תוך שניות", "מוסיפים כפית דבש אם בא לכם", "זהו. באמת."],
     nutrition: "חלבון מלא · B12 · ברזל",
     tags: ["ילדים", "חלבון"],
-    baseMadeCount: 156, image: null,
+    baseMadeCount: 156, image: "/recipes/green-yogurt.webp",
   },
   {
     slug: "orange-spirulina",
@@ -53,7 +53,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מערבבים קובייה מופשרת לתוך כוס מיץ התפוזים", "מערבבים היטב (או בבלנדר) עד מרקם הומוגני", "מיץ תפוזים ירוק ומתוק — מוכן"],
     nutrition: "ויטמין C · ברזל · נוגדי חמצון",
     tags: ["ילדים", "טבעוני"],
-    baseMadeCount: 76, image: null,
+    baseMadeCount: 76, image: "/recipes/orange-spirulina.webp",
   },
   {
     slug: "tuna-spirulina",
@@ -63,7 +63,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מחליפים את המיונז בקובייה מופשרת", "מערבבים היטב", "מקבלים חלבון צמחי ונוגדי חמצון נוספים"],
     nutrition: "חלבון · נוגדי חמצון · אומגה 3",
     tags: ["חלבון"],
-    baseMadeCount: 41, image: null,
+    baseMadeCount: 41, image: "/recipes/tuna-spirulina.webp",
   },
   {
     slug: "avocado-spirulina",
@@ -73,7 +73,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מוסיפים קובייה מופשרת למתכון האבוקדו המקורי", "מערבבים היטב למחית חלקה", "מגישים עם ירקות או קרקרים"],
     nutrition: "שומן בריא · ברזל · חומצה פולית",
     tags: ["טבעוני", "קטו"],
-    baseMadeCount: 59, image: null,
+    baseMadeCount: 59, image: "/recipes/avocado-spirulina.webp",
   },
   // ===== רמה 2 — דקה =====
   {
@@ -84,7 +84,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מכניסים את כל הרכיבים למעבד מזון או בלנדר", "טוחנים עד נוזל סמיך אך חלק", "מפזרים זרעי פשתן מעל ומגישים"],
     nutrition: "חלבון מלא · BCAA · ברזל · B12",
     tags: ["חלבון", "פיטנס"],
-    baseMadeCount: 143, image: null,
+    baseMadeCount: 143, image: "/recipes/protein-banana-shake.webp",
   },
   {
     slug: "buddha-bowl",
@@ -94,7 +94,7 @@ export const RECIPES: Recipe[] = [
     steps: ["חשוב שכל הפירות יהיו קפואים לחלוטין", "טוחנים את כל החומרים במעבד מזון עד מרקם חלק ואחיד ללא גושים", "מעבירים לקערה, מקשטים בפירות טריים ומגישים מיד"],
     nutrition: "חלבון · ברזל · ויטמין C",
     tags: ["ילדים", "אינסטגרם"],
-    baseMadeCount: 118, image: null,
+    baseMadeCount: 118, image: "/recipes/buddha-bowl.webp",
   },
   // ===== רמה 3 — 5 דקות =====
   {
@@ -105,7 +105,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מכניסים את כל המרכיבים למעבד מזון או בלנדר", "טוחנים עד מרקם חלק ומהמם", "מדללים במים לפי הצורך"],
     nutrition: "סידן · ברזל · חלבון מלא",
     tags: ["טבעוני", "ללא גלוטן"],
-    baseMadeCount: 88, image: null,
+    baseMadeCount: 88, image: "/recipes/fresh-tahini.webp",
   },
   {
     slug: "salad-dressing",
@@ -115,7 +115,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מכניסים את כל החומרים לצנצנת", "מנערים היטב עד מרקם חלק ואחיד", "מזלפים על כל סלט"],
     nutrition: "נוגדי חמצון · ברזל · ויטמין C",
     tags: ["טבעוני"],
-    baseMadeCount: 52, image: null,
+    baseMadeCount: 52, image: "/recipes/salad-dressing.webp",
   },
   {
     slug: "green-pesto",
@@ -136,7 +136,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מערבבים את כל החומרים בקערה — הכל קר", "מכניסים למקרר ללילה או לכמה שעות עד שהתערובת מסמיכה", "מעבירים לכלי הגשה ומקשטים ביוגורט, פיסטוקים ופירות"],
     nutrition: "אומגה 3 (צ'יה) · חלבון מלא · ברזל",
     tags: ["טבעוני", "ילדים"],
-    baseMadeCount: 64, image: null,
+    baseMadeCount: 64, image: "/recipes/chia-pudding.webp",
   },
   {
     slug: "yogurt-bark",
@@ -146,7 +146,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מערבבים יוגורט וספירולינה למרקם אחיד", "מורחים על משטח מרופד בנייר אפייה", "מפזרים תוספות מועדפות", "מקפיאים 3 שעות ומעלה ופורסים לחטיפים"],
     nutrition: "פרוביוטיקה · חלבון · נוגדי חמצון",
     tags: ["ילדים", "קיץ"],
-    baseMadeCount: 97, image: null,
+    baseMadeCount: 97, image: "/recipes/yogurt-bark.webp",
   },
 ];
 
