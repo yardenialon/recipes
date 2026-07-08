@@ -57,6 +57,20 @@ export default function RecipeSheet({
     setMade(false);
     setCount(recipe.baseMadeCount);
     setAlreadyToday(typeof window !== "undefined" && !!localStorage.getItem(madeKey(recipe.slug)));
+
+    // מוסיפים את הספירה האמיתית מה-DB מעל מונה הבסיס (0 אם Supabase לא מחובר)
+    let active = true;
+    fetch(`/api/made?slug=${encodeURIComponent(recipe.slug)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (active && d?.ok && typeof d.count === "number") {
+          setCount(recipe.baseMadeCount + d.count);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
   }, [recipe]);
 
   // נעילת גלילת רקע כשה-sheet פתוח
