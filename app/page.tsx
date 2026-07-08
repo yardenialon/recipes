@@ -1,6 +1,6 @@
 import RecipeExplorer from "@/components/RecipeExplorer";
 import Faq from "@/components/Faq";
-import { RECIPES, WHATSAPP_LINK, SHOP_LINK } from "@/lib/recipes";
+import { RECIPES, WHATSAPP_LINK, SHOP_LINK, STORE_LOCATOR_LINK } from "@/lib/recipes";
 
 /** Schema.org Recipe markup — נכס ה-SEO המרכזי של פאזה 1 */
 function recipeJsonLd() {
@@ -101,7 +101,15 @@ export default function Home() {
             rel="noopener noreferrer"
             className="block border-2 border-white/70 text-white font-bold rounded-btn py-3 mt-2.5"
           >
-            לרכישה בחנות
+            לרכישה באתר
+          </a>
+          <a
+            href={STORE_LOCATOR_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-[13px] text-brand-yellow font-bold underline underline-offset-4 mt-3.5"
+          >
+            איפה לקנות ספירולינה סביבך? 📍
           </a>
         </div>
       </section>
