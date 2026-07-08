@@ -1,7 +1,7 @@
 // ============================================================
 // שכבת הנתונים — פאזה 1: מתכונים סטטיים (SSG מושלם ל-SEO)
 // המתכונים לקוחים מחומרי SimpliiGood הרשמיים — כולם קרים (בלי חימום).
-// תמונות: קבצי WebP ב-public/recipes/. פסטו עדיין null (placeholder) עד שתגיע תמונה.
+// תמונות: קבצי WebP ב-public/recipes/ — לכל המתכונים יש תמונה אמיתית.
 // בפאזה 2 השכבה הזו עוברת לטבלת recipes ב-Supabase — הטיפוס נשאר זהה.
 // ============================================================
 
@@ -75,6 +75,16 @@ export const RECIPES: Recipe[] = [
     tags: ["טבעוני", "קטו"],
     baseMadeCount: 59, image: "/recipes/avocado-spirulina.webp",
   },
+  {
+    slug: "green-hummus",
+    name: "חומוס ספירולינה",
+    level: 1, timeLabel: "10 שנ'", cubes: 1, meal: "צהריים",
+    ingredients: ["3 כפות חומוס מוכן", "קובייה SimpliiGood מופשרת", "שמן זית, פפריקה"],
+    steps: ["מערבבים את הקובייה בחומוס", "מזליפים שמן זית", "נגיעת פפריקה ומוכן"],
+    nutrition: "חלבון · ברזל · סיבים",
+    tags: ["טבעוני"],
+    baseMadeCount: 77, image: "/recipes/green-hummus.webp",
+  },
   // ===== רמה 2 — דקה =====
   {
     slug: "protein-banana-shake",
@@ -125,7 +135,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מכניסים את כל החומרים למעבד מזון", "פולסים עד מרקם גס", "מגישים על לחם, בסלט פסטה קר, או כמטבל"],
     nutrition: "נוגדי חמצון · ברזל · שומן בריא",
     tags: ["טבעוני", "משפחה"],
-    baseMadeCount: 47, image: null,
+    baseMadeCount: 47, image: "/recipes/green-pesto.webp",
   },
   // ===== רמה 4 — שווה את ההשקעה =====
   {
