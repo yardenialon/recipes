@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== הקובייה — אלמנט החתימה ===== */
+.cube {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #147a63, #0e5b4a 60%, #0a4237);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.25), 0 2px 4px rgba(14, 91, 74, 0.35);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.cube-lg { width: 52px; height: 52px; border-radius: 14px; }
+
+/* ===== placeholder לתמונות אמיתיות (עד יום הצילום) ===== */
+.photo-slot {
+  background: linear-gradient(135deg, #ddede6, #c7e0d6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5e8578;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* ===== קונפטי ===== */
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  top: 0;
+  width: 10px;
+  height: 14px;
+  z-index: 60;
+  animation: confetti-fall 1.6s ease-in forwards;
+  pointer-events: none;
+}
+
+/* ===== bottom sheet ===== */
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.sheet-enter { animation: sheet-up 0.28s cubic-bezier(0.2, 0.9, 0.3, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece, .sheet-enter { animation: none; }
+}
+
+html { scroll-behavior: smooth; }
