@@ -1,0 +1,66 @@
+// ============================================================
+// פאזה 2 — אתגר 14 יום אישי (אנונימי, לפי מכשיר)
+// ============================================================
+
+export const CHALLENGE_DAYS = 14;
+export const POINTS_PER_MADE = 10;
+
+export interface Progress {
+  daysCompleted: number;
+  currentStreak: number;
+  longestStreak: number;
+  points: number;
+  startedAt: string | null;
+  lastDay: string | null;
+}
+
+export const EMPTY_PROGRESS: Progress = {
+  daysCompleted: 0,
+  currentStreak: 0,
+  longestStreak: 0,
+  points: 0,
+  startedAt: null,
+  lastDay: null,
+};
+
+const DEVICE_KEY = "sg_device";
+
+/** מזהה אנונימי יציב למכשיר (נשמר ב-localStorage). "" בצד שרת. */
+export function getDeviceId(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    let id = localStorage.getItem(DEVICE_KEY);
+    if (!id || id.length < 8) {
+      id =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `d_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 12)}`;
+      localStorage.setItem(DEVICE_KEY, id);
+    }
+    return id;
+  } catch {
+    return "";
+  }
+}
+
+/** שורת DB גולמית (snake_case) כפי שמגיעה מ-PostgREST */
+export interface ProgressRow {
+  days_completed?: number;
+  current_streak?: number;
+  longest_streak?: number;
+  points?: number;
+  started_at?: string | null;
+  last_day?: string | null;
+}
+
+/** ממפה שורת DB לטיפוס Progress (משמש גם בשרת וגם בלקוח) */
+export function mapProgress(row: ProgressRow | null | undefined): Progress {
+  return {
+    daysCompleted: Number(row?.days_completed ?? 0),
+    currentStreak: Number(row?.current_streak ?? 0),
+    longestStreak: Number(row?.longest_streak ?? 0),
+    points: Number(row?.points ?? 0),
+    startedAt: row?.started_at ?? null,
+    lastDay: row?.last_day ?? null,
+  };
+}

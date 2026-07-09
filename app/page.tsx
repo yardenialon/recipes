@@ -1,3 +1,4 @@
+import Link from "next/link";
 import RecipeExplorer from "@/components/RecipeExplorer";
 import Faq from "@/components/Faq";
 import { RECIPES, WHATSAPP_LINK, SHOP_LINK, STORE_LOCATOR_LINK } from "@/lib/recipes";
@@ -45,12 +46,20 @@ export default function Home() {
         <p className="text-sm md:text-base text-[#BFD4D2] mt-2.5 max-w-md">
           כל הדרכים לשלב ספירולינה טרייה ביומיום — בלי להיות שף ובלי לשנות הרגלים.
         </p>
-        <a
-          href="#recipes"
-          className="inline-block mt-5 bg-brand-yellow text-brand-green font-extrabold rounded-btn px-8 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
-        >
-          גלו איך מתחילים ↓
-        </a>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <a
+            href="#recipes"
+            className="inline-block bg-brand-yellow text-brand-green font-extrabold rounded-btn px-8 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
+          >
+            גלו איך מתחילים ↓
+          </a>
+          <Link
+            href="/journey"
+            className="inline-flex items-center gap-1.5 text-brand-yellow font-bold text-sm underline underline-offset-4"
+          >
+            🔥 המסע שלי — אתגר 14 יום
+          </Link>
+        </div>
       </header>
 
       {/* ===== 3 דברים שחייבים לדעת ===== */}

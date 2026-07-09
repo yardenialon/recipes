@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { Recipe, RECIPES, WHATSAPP_LINK } from "@/lib/recipes";
+import { getDeviceId, type Progress } from "@/lib/challenge";
 import RecipeCard, { CubesMeter, RecipePhoto } from "./RecipeCard";
 
 const COLORS = ["#FEE62D", "#0E5B4A", "#154048", "#7FD1B9"];
@@ -52,10 +54,12 @@ export default function RecipeSheet({
   const [made, setMade] = useState(false);
   const [alreadyToday, setAlreadyToday] = useState(false);
   const [count, setCount] = useState(recipe.baseMadeCount);
+  const [progress, setProgress] = useState<Progress | null>(null);
 
   useEffect(() => {
     setMade(false);
     setCount(recipe.baseMadeCount);
+    setProgress(null);
     setAlreadyToday(typeof window !== "undefined" && !!localStorage.getItem(madeKey(recipe.slug)));
 
     // מוסיפים את הספירה האמיתית מה-DB מעל מונה הבסיס (0 אם Supabase לא מחובר)
@@ -92,12 +96,17 @@ export default function RecipeSheet({
     setCount((c) => c + 1);
     localStorage.setItem(madeKey(recipe.slug), "1");
     setAlreadyToday(true);
-    // fire-and-forget — לא חוסמים UI על רשת
+    // fire-and-forget — לא חוסמים UI על רשת. שולחים deviceId למעקב מסע ה-14 יום.
     fetch("/api/made", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug: recipe.slug }),
-    }).catch(() => {});
+      body: JSON.stringify({ slug: recipe.slug, deviceId: getDeviceId() }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.progress) setProgress(d.progress as Progress);
+      })
+      .catch(() => {});
   }
 
   return (
@@ -122,6 +131,20 @@ export default function RecipeSheet({
                 <br />
                 נתראה מחר עם הקובייה הבאה?
               </p>
+              {progress && (
+                <div className="mt-4">
+                  <div className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full px-4 py-2 text-sm font-bold">
+                    <span>🔥 {progress.currentStreak} ברצף</span>
+                    <span className="opacity-40">·</span>
+                    <span>⭐ {progress.points} נק'</span>
+                  </div>
+                  <div className="mt-2">
+                    <Link href="/journey" className="text-sm font-extrabold text-brand-green underline underline-offset-4">
+                      למסע שלי ←
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="p-5">
               <div className="font-extrabold text-[15px] mb-3">אולי בא לך גם…</div>
