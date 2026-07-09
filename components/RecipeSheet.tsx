@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Recipe, RECIPES, WHATSAPP_LINK } from "@/lib/recipes";
 import { getDeviceId, type Progress } from "@/lib/challenge";
+import { badgeJustEarned } from "@/lib/rewards";
 import RecipeCard, { CubesMeter, RecipePhoto } from "./RecipeCard";
 
 const COLORS = ["#FEE62D", "#0E5B4A", "#154048", "#7FD1B9"];
@@ -133,6 +134,11 @@ export default function RecipeSheet({
               </p>
               {progress && (
                 <div className="mt-4">
+                  {badgeJustEarned(progress) && (
+                    <div className="mb-2 text-sm font-black text-brand-green">
+                      {badgeJustEarned(progress)!.emoji} תג חדש: {badgeJustEarned(progress)!.title}!
+                    </div>
+                  )}
                   <div className="inline-flex items-center gap-3 bg-brand-green text-white rounded-full px-4 py-2 text-sm font-bold">
                     <span>🔥 {progress.currentStreak} ברצף</span>
                     <span className="opacity-40">·</span>
