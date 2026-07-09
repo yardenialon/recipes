@@ -32,9 +32,9 @@ function IconThaw() {
   return (
     <svg viewBox="0 0 48 48" className="w-8 h-8" fill="none" aria-hidden>
       <defs>{cubeGrad("thawG")}</defs>
-      <rect x="8" y="11" width="22" height="22" rx="7" fill="url(#thawG)" />
-      <path d="M13 17.5c1.8-1.9 3.8-2.6 6-2.6" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
-      <path d="M18.5 38c1.9 0 3.2-1.4 3.2-3.1 0-1.7-2.3-3.9-3.2-5-.9 1.1-3.2 3.3-3.2 5 0 1.7 1.3 3.1 3.2 3.1z" fill="#7FC6B0" />
+      <rect x="6" y="12" width="27" height="19" rx="6" fill="url(#thawG)" />
+      <path d="M12 18c2-1.9 4.2-2.6 6.6-2.6" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
+      <path d="M17.5 40c1.9 0 3.2-1.4 3.2-3.1 0-1.7-2.3-3.9-3.2-5-.9 1.1-3.2 3.3-3.2 5 0 1.7 1.3 3.1 3.2 3.1z" fill="#7FC6B0" />
       <circle cx="34" cy="34" r="9.5" fill="#FEE62D" />
       <path d="M34 29.2V34l3.2 2.1" stroke="#154048" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -45,10 +45,11 @@ function IconTwoCubes() {
   return (
     <svg viewBox="0 0 48 48" className="w-8 h-8" fill="none" aria-hidden>
       <defs>{cubeGrad("twoG")}</defs>
-      <rect x="7" y="20" width="19" height="19" rx="6" fill="url(#twoG)" />
-      <rect x="22" y="9" width="19" height="19" rx="6" fill="url(#twoG)" stroke="#EAF3EF" strokeWidth="2" />
-      <path d="M12 25.5c1.6-1.7 3.4-2.3 5.4-2.3" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
-      <path d="M27 14.5c1.6-1.7 3.4-2.3 5.4-2.3" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
+      {/* שתי מנות מלבניות (בול הקפוא) */}
+      <rect x="4" y="24" width="25" height="15" rx="5" fill="url(#twoG)" />
+      <rect x="20" y="10" width="25" height="15" rx="5" fill="url(#twoG)" stroke="#EAF3EF" strokeWidth="2" />
+      <path d="M9 29.5c2-1.4 4.2-1.9 6.7-1.9" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
+      <path d="M25 15.5c2-1.4 4.2-1.9 6.7-1.9" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -92,7 +93,7 @@ export default function Home() {
           SIMPLIIGOOD
         </div>
         <h1 className="text-[31px] md:text-[44px] font-black leading-[1.15]">
-          2 קוביות ביום.
+          2 מנות ביום.
           <br />
           <span className="text-brand-yellow">ככה פשוט.</span>
         </h1>
@@ -127,7 +128,7 @@ export default function Home() {
         <div className="grid grid-cols-3 gap-2.5">
           {[
             { icon: <IconThaw />, t: "מפשירים", s: "3 דקות" },
-            { icon: <IconTwoCubes />, t: "2 קוביות", s: "המינון היומי" },
+            { icon: <IconTwoCubes />, t: "2 מנות", s: "המינון היומי" },
             { icon: <IconCold />, t: "בלי חימום", s: "רק קר" },
           ].map((k) => (
             <div

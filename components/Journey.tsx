@@ -98,7 +98,7 @@ function StartCard() {
   return (
     <div className="bg-white rounded-card shadow-card p-6 text-center">
       <div className="text-5xl" aria-hidden>🌱</div>
-      <h2 className="text-xl font-black mt-2">המסע שלך מתחיל בקובייה אחת</h2>
+      <h2 className="text-xl font-black mt-2">המסע שלך מתחיל במנה אחת</h2>
       <p className="text-sm text-brand-soft mt-1.5">
         בחרו מתכון, לחצו &quot;הכנתי!&quot; — וזהו, יום ראשון בכיס. נתראה כאן מחר.
       </p>
@@ -208,7 +208,7 @@ function KeepGoingCard({ done }: { done: number }) {
     <div className="bg-brand-green rounded-card text-center text-white p-5 mt-3">
       <div className="font-black text-lg">עוד {left} ימים לסיום האתגר 💪</div>
       <p className="text-[13px] text-[#BFD4D2] mt-1 mb-3.5">
-        הכינו היום קובייה נוספת ושמרו על הרצף
+        הכינו היום מנה נוספת ושמרו על הרצף
       </p>
       <Link
         href="/#recipes"
@@ -234,7 +234,7 @@ function FinishedCard() {
       <div className="text-5xl" aria-hidden>🏆</div>
       <h2 className="text-2xl font-black mt-1">סיימת 14 יום!</h2>
       <p className="text-sm mt-1.5 font-medium">
-        הפכת את הקובייה היומית להרגל. גאים בך. אפשר להמשיך — הרצף ממשיך לרוץ.
+        הפכת את המנה היומית להרגל. גאים בך. אפשר להמשיך — הרצף ממשיך לרוץ.
       </p>
       <a
         href={SHOP_LINK}
@@ -286,7 +286,7 @@ export default function Journey() {
           ← חזרה למתכונים
         </Link>
         <h1 className="text-[28px] md:text-[38px] font-black mt-3">המסע שלי</h1>
-        <p className="text-sm text-[#BFD4D2] mt-1">אתגר 14 יום · 2 קוביות ביום</p>
+        <p className="text-sm text-[#BFD4D2] mt-1">אתגר 14 יום · 2 מנות ביום</p>
         <Link href="/feed" className="inline-block mt-3 text-[13px] text-brand-yellow font-bold underline underline-offset-4">
           📸 לפיד הקהילה
         </Link>
