@@ -14,16 +14,21 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      `${env.url}/rest/v1/ugc_uploads?select=id,storage_path,created_at&status=eq.approved&order=created_at.desc&limit=30`,
+      `${env.url}/rest/v1/ugc_uploads?select=id,storage_path,created_at,display_name&status=eq.approved&order=created_at.desc&limit=30`,
       { headers: { apikey: env.key, Authorization: `Bearer ${env.key}`, Accept: "application/json" } }
     );
     if (!res.ok) return NextResponse.json({ ok: true, items: [] });
 
-    const rows = (await res.json()) as Array<{ id: number; storage_path: string; created_at: string }>;
+    const rows = (await res.json()) as Array<{
+      id: number;
+      storage_path: string;
+      created_at: string;
+      display_name: string | null;
+    }>;
     const signed = await Promise.all(
       rows.map(async (r) => {
         const url = await signUrl(env, r.storage_path);
-        return url ? { id: r.id, url, createdAt: r.created_at } : null;
+        return url ? { id: r.id, url, createdAt: r.created_at, name: r.display_name ?? null } : null;
       })
     );
     return NextResponse.json({ ok: true, items: signed.filter(Boolean) });

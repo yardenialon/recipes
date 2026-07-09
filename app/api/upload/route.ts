@@ -36,6 +36,8 @@ export async function POST(req: NextRequest) {
 
   const deviceId = form.get("deviceId");
   const file = form.get("file");
+  const nameRaw = form.get("name");
+  const name = typeof nameRaw === "string" ? nameRaw.trim().slice(0, 40) : "";
 
   if (typeof deviceId !== "string" || deviceId.length < 8 || deviceId.length > 64) {
     return NextResponse.json({ ok: false, error: "invalid device" }, { status: 400 });
@@ -81,7 +83,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ p_device_id: safeDevice, p_path: path }),
+      body: JSON.stringify({ p_device_id: safeDevice, p_path: path, p_name: name || null }),
     });
     if (res.ok) {
       const data = await res.json();
