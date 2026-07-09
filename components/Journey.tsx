@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CHALLENGE_DAYS, EMPTY_PROGRESS, getDeviceId, type Progress } from "@/lib/challenge";
+import { badgeStatus, rewardStatus, REWARD } from "@/lib/rewards";
 import { WHATSAPP_LINK, SHOP_LINK } from "@/lib/recipes";
 
 function Stat({ emoji, value, label }: { emoji: string; value: number; label: string }) {
@@ -11,6 +12,83 @@ function Stat({ emoji, value, label }: { emoji: string; value: number; label: st
       <div className="text-2xl" aria-hidden>{emoji}</div>
       <div className="text-2xl font-black mt-0.5">{value}</div>
       <div className="text-xs text-brand-soft font-medium">{label}</div>
+    </div>
+  );
+}
+
+function BadgesCard({ days }: { days: number }) {
+  const badges = badgeStatus(days);
+  return (
+    <div className="bg-white rounded-card shadow-card p-5 mt-3">
+      <div className="font-extrabold text-[15px] mb-3">התגים שלי</div>
+      <div className="grid grid-cols-4 gap-2">
+        {badges.map((b) => (
+          <div
+            key={b.id}
+            className={`rounded-xl p-2.5 text-center ${b.earned ? "bg-brand-mint" : "bg-brand-mint/40"}`}
+          >
+            <div className={`text-2xl ${b.earned ? "" : "grayscale opacity-40"}`} aria-hidden>
+              {b.emoji}
+            </div>
+            <div className={`text-[11px] font-bold mt-1 ${b.earned ? "" : "text-brand-soft"}`}>
+              {b.title}
+            </div>
+            <div className="text-[10px] text-brand-soft">{b.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RewardCard({ points }: { points: number }) {
+  const { unlocked, remaining } = rewardStatus(points);
+  const [copied, setCopied] = useState(false);
+  const pct = Math.min(100, Math.round((points / REWARD.pointsNeeded) * 100));
+
+  if (!unlocked) {
+    return (
+      <div className="bg-white rounded-card shadow-card p-5 mt-3">
+        <div className="flex items-center gap-3">
+          <div className="text-3xl" aria-hidden>🎁</div>
+          <div>
+            <div className="font-extrabold text-[15px]">קוד הנחה מחכה לך</div>
+            <div className="text-xs text-brand-soft mt-0.5">
+              עוד {remaining} נקודות ל{REWARD.label}
+            </div>
+          </div>
+        </div>
+        <div className="h-2 bg-brand-mint rounded-full mt-3 overflow-hidden">
+          <div className="h-full bg-brand-green rounded-full" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-brand-green text-white rounded-card p-5 mt-3 text-center">
+      <div className="text-3xl" aria-hidden>🎁</div>
+      <div className="font-black text-lg mt-1">פתחת {REWARD.label}!</div>
+      <button
+        onClick={() => {
+          navigator.clipboard?.writeText(REWARD.code).catch(() => {});
+          setCopied(true);
+        }}
+        className="mt-3 inline-flex items-center gap-2 bg-brand-yellow text-brand-green font-black rounded-btn px-5 py-2.5 tracking-widest"
+      >
+        {REWARD.code} <span aria-hidden>{copied ? "✓" : "📋"}</span>
+      </button>
+      <div className="text-[12px] text-[#BFD4D2] mt-2">
+        {copied ? "הקוד הועתק" : "העתיקו את הקוד"} · ממשים בקנייה
+      </div>
+      <a
+        href={SHOP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block bg-brand-yellow text-brand-green font-extrabold rounded-btn py-3 mt-3"
+      >
+        לחנות
+      </a>
     </div>
   );
 }
@@ -167,6 +245,9 @@ export default function Journey() {
             <Stat emoji="⭐" value={p.points} label="נקודות" />
             <Stat emoji="🏅" value={p.longestStreak} label="שיא רצף" />
           </div>
+
+          <BadgesCard days={p.daysCompleted} />
+          <RewardCard points={p.points} />
 
           {finished ? <FinishedCard /> : <KeepGoingCard done={done} />}
         </div>
