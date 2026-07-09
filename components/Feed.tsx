@@ -15,7 +15,7 @@ export default function Feed() {
 
   useEffect(() => {
     let active = true;
-    fetch("/api/feed")
+    fetch("/api/feed", { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (active) setItems(d?.items ?? []);
