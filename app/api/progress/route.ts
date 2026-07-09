@@ -3,7 +3,6 @@ import { EMPTY_PROGRESS, mapProgress } from "@/lib/challenge";
 
 /**
  * GET /api/progress?device=… — מחזיר את מצב מסע ה-14 יום למכשיר.
- * GET /api/progress?diag=1    — אבחון זמני: האם הטבלה קיימת וכמה שורות בה (בלי סודות).
  * בלי env של Supabase (או בשגיאה) — מחזיר progress ריק, כדי שהמסך ירוץ תמיד.
  */
 
@@ -12,36 +11,6 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  // ---- אבחון זמני ----
-  if (req.nextUrl.searchParams.get("diag") === "1") {
-    const diag: Record<string, unknown> = {
-      hasUrl: !!url,
-      hasKey: !!key,
-      readStatus: null,
-      totalRows: null,
-      error: null,
-    };
-    if (url && key) {
-      try {
-        const res = await fetch(`${url}/rest/v1/challenge_progress?select=device_id`, {
-          headers: {
-            apikey: key,
-            Authorization: `Bearer ${key}`,
-            Prefer: "count=exact",
-            Range: "0-0",
-          },
-        });
-        diag.readStatus = res.status;
-        const cr = res.headers.get("content-range");
-        diag.totalRows = cr ? parseInt(cr.split("/")[1] ?? "0", 10) : null;
-        if (!res.ok) diag.error = (await res.text()).slice(0, 300);
-      } catch (e) {
-        diag.error = String(e).slice(0, 300);
-      }
-    }
-    return NextResponse.json(diag);
-  }
 
   const device = req.nextUrl.searchParams.get("device");
   if (!device || device.length < 8 || device.length > 64) {
