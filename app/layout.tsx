@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SimpliiGood — איך משתמשים בספירולינה טרייה | 2 קוביות ביום, ככה פשוט",
+  title: "SimpliiGood — איך משתמשים בספירולינה טרייה | 2 מנות ביום, ככה פשוט",
   description:
     "כל הדרכים לשלב ספירולינה טרייה-קפואה ביומיום: מתכוני 10 שניות, שייקים של דקה, וקינוחים ירוקים שהילדים יאהבו. בעברית, פשוט, בלי להיות שף.",
   keywords: ["ספירולינה", "ספירולינה קפואה", "מתכונים עם ספירולינה", "SimpliiGood", "סופרפוד"],
   openGraph: {
-    title: "2 קוביות ביום. ככה פשוט. | SimpliiGood",
+    title: "2 מנות ביום. ככה פשוט. | SimpliiGood",
     description: "מתכוני ספירולינה של 10 שניות ועד קינוחים ירוקים — הכל בעברית.",
     locale: "he_IL",
     type: "website",

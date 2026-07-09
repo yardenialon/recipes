@@ -2,9 +2,14 @@ import { Recipe } from "@/lib/recipes";
 
 export function CubesMeter({ count, size = 15 }: { count: number; size?: number }) {
   return (
-    <span className="inline-flex items-center gap-1" aria-label={`${count} קוביות`}>
+    <span className="inline-flex items-center gap-1" aria-label={`${count} מנות`}>
       {Array.from({ length: count }).map((_, i) => (
-        <span key={i} className="cube" style={{ width: size, height: size }} aria-hidden />
+        <span
+          key={i}
+          className="cube"
+          style={{ width: Math.round(size * 1.5), height: size, borderRadius: Math.round(size * 0.32) }}
+          aria-hidden
+        />
       ))}
     </span>
   );
@@ -41,7 +46,7 @@ export default function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen:
         <div className="flex items-center gap-1.5 mt-1.5 text-xs text-brand-soft font-medium">
           <CubesMeter count={recipe.cubes} size={13} />
           <span>
-            {recipe.cubes === 1 ? "קובייה" : `${recipe.cubes} קוביות`} · {recipe.meal}
+            {recipe.cubes === 1 ? "מנה" : `${recipe.cubes} מנות`} · {recipe.meal}
           </span>
         </div>
       </div>

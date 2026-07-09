@@ -130,7 +130,7 @@ export default function RecipeSheet({
               <p className="text-sm mt-1.5 font-medium">
                 זו ההתחלה של הרגל חדש.
                 <br />
-                נתראה מחר עם הקובייה הבאה?
+                נתראה מחר עם המנה הבאה?
               </p>
               {progress && (
                 <div className="mt-4">
@@ -186,7 +186,7 @@ export default function RecipeSheet({
               </span>
               <span className="bg-brand-mint rounded-full px-3 py-1 text-xs font-bold inline-flex items-center gap-1.5">
                 <CubesMeter count={recipe.cubes} size={13} />
-                {recipe.cubes === 1 ? "קובייה אחת" : `${recipe.cubes} קוביות`}
+                {recipe.cubes === 1 ? "מנה אחת" : `${recipe.cubes} מנות`}
               </span>
               <span className="bg-brand-mint rounded-full px-3 py-1 text-xs font-bold">
                 🍽️ {recipe.meal}
