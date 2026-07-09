@@ -264,6 +264,9 @@ export default function Journey() {
         </Link>
         <h1 className="text-[28px] md:text-[38px] font-black mt-3">המסע שלי</h1>
         <p className="text-sm text-[#BFD4D2] mt-1">אתגר 14 יום · 2 קוביות ביום</p>
+        <Link href="/feed" className="inline-block mt-3 text-[13px] text-brand-yellow font-bold underline underline-offset-4">
+          📸 לפיד הקהילה
+        </Link>
       </header>
 
       {loading ? (
