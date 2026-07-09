@@ -59,41 +59,6 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  // אבחון זמני: /api/made?diag=1 — מדווח אם ה-env נטען ומה סטטוס Supabase.
-  // לא חושף שום סוד (רק בוליאנים + קוד סטטוס HTTP). להסרה אחרי שהחיבור עובד.
-  if (req.nextUrl.searchParams.get("diag") === "1") {
-    const diag: Record<string, unknown> = {
-      hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-      hasKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      readStatus: null,
-      totalRows: null,
-      error: null,
-    };
-    const env = supabaseEnv();
-    if (env) {
-      try {
-        const res = await fetch(
-          `${env.url}/rest/v1/recipe_completions?select=id`,
-          {
-            headers: {
-              apikey: env.key,
-              Authorization: `Bearer ${env.key}`,
-              Prefer: "count=exact",
-              Range: "0-0",
-            },
-          }
-        );
-        diag.readStatus = res.status;
-        const cr = res.headers.get("content-range");
-        diag.totalRows = cr ? parseInt(cr.split("/")[1] ?? "0", 10) : null;
-        if (!res.ok) diag.error = (await res.text()).slice(0, 300);
-      } catch (e) {
-        diag.error = String(e).slice(0, 300);
-      }
-    }
-    return NextResponse.json(diag);
-  }
-
   const slug = req.nextUrl.searchParams.get("slug");
   if (!slug || !VALID_SLUGS.has(slug)) {
     return NextResponse.json({ ok: false, error: "invalid slug" }, { status: 400 });
