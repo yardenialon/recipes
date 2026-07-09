@@ -7,6 +7,7 @@ interface FeedItem {
   id: number;
   url: string;
   createdAt: string;
+  name: string | null;
 }
 
 export default function Feed() {
@@ -58,14 +59,20 @@ export default function Feed() {
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
             {items.map((item) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={item.id}
-                src={item.url}
-                alt="יצירת קהילה"
-                loading="lazy"
-                className="w-full aspect-square object-cover rounded-2xl shadow-card"
-              />
+              <figure key={item.id} className="relative rounded-2xl overflow-hidden shadow-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.url}
+                  alt={item.name ? `יצירה של ${item.name}` : "יצירת קהילה"}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover"
+                />
+                {item.name && (
+                  <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent text-white text-[12px] font-bold px-2.5 py-2">
+                    {item.name}
+                  </figcaption>
+                )}
+              </figure>
             ))}
           </div>
         )}

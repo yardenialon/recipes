@@ -99,6 +99,9 @@ create table if not exists ugc_uploads (
 
 create index if not exists idx_ugc_status_time on ugc_uploads (status, created_at desc);
 
+-- שם תצוגה אופציונלי לקרדיט בפיד (לא PII מזהה — כינוי בלבד)
+alter table ugc_uploads add column if not exists display_name text;
+
 alter table ugc_uploads enable row level security;
 
 -- bucket פרטי להעלאות. גישה רק דרך service role (ה-API route) — אין קריאה ציבורית.
@@ -108,7 +111,8 @@ on conflict (id) do nothing;
 
 -- רישום העלאה + הענקת נקודות עם תקרה יומית (רק ההעלאה הראשונה ביום מזכה).
 -- מחזיר json: awarded + שדות ה-progress.
-create or replace function record_upload(p_device_id text, p_path text)
+drop function if exists record_upload(text, text);
+create or replace function record_upload(p_device_id text, p_path text, p_name text default null)
 returns json
 language plpgsql
 security definer
@@ -119,7 +123,8 @@ declare
   r       challenge_progress;
   awarded boolean := false;
 begin
-  insert into ugc_uploads (device_id, storage_path) values (p_device_id, p_path);
+  insert into ugc_uploads (device_id, storage_path, display_name)
+  values (p_device_id, p_path, nullif(btrim(coalesce(p_name, '')), ''));
 
   select * into r from challenge_progress where device_id = p_device_id;
 

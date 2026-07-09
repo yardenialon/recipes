@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
   if (!env) return NextResponse.json({ ok: false, error: "storage unavailable" }, { status: 503 });
 
   const res = await fetch(
-    `${env.url}/rest/v1/ugc_uploads?select=id,device_id,storage_path,created_at&status=eq.pending&order=created_at.asc&limit=50`,
+    `${env.url}/rest/v1/ugc_uploads?select=id,device_id,storage_path,created_at,display_name&status=eq.pending&order=created_at.asc&limit=50`,
     { headers: { apikey: env.key, Authorization: `Bearer ${env.key}`, Accept: "application/json" } }
   );
   if (!res.ok) return NextResponse.json({ ok: false, error: "read failed" }, { status: 502 });
@@ -48,12 +48,14 @@ export async function GET(req: NextRequest) {
     device_id: string;
     storage_path: string;
     created_at: string;
+    display_name: string | null;
   }>;
 
   const items = await Promise.all(
     rows.map(async (r) => ({
       id: r.id,
       device: String(r.device_id).slice(0, 8),
+      name: r.display_name ?? null,
       createdAt: r.created_at,
       path: r.storage_path,
       url: await signUrl(env, r.storage_path),

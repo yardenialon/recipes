@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 interface Item {
   id: number;
   device: string;
+  name: string | null;
   createdAt: string;
   path: string;
   url: string | null;
@@ -116,6 +117,7 @@ export default function Admin() {
                 </div>
               )}
               <div className="p-3">
+                {item.name && <div className="text-sm font-bold mb-0.5">{item.name}</div>}
                 <div className="text-xs text-brand-soft mb-2">
                   {item.device}… · {new Date(item.createdAt).toLocaleString("he-IL")}
                 </div>

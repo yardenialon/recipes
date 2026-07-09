@@ -115,7 +115,16 @@ function StartCard() {
 function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
   const [state, setState] = useState<"idle" | "working" | "done" | "error">("idle");
   const [msg, setMsg] = useState("");
+  const [name, setName] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    try {
+      setName(localStorage.getItem("sg_name") ?? "");
+    } catch {
+      /* noop */
+    }
+  }, []);
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -124,9 +133,16 @@ function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
     setState("working");
     setMsg("");
     try {
+      const trimmed = name.trim();
+      try {
+        if (trimmed) localStorage.setItem("sg_name", trimmed);
+      } catch {
+        /* noop */
+      }
       const blob = await resizeImage(file);
       const fd = new FormData();
       fd.append("deviceId", getDeviceId());
+      fd.append("name", trimmed);
       fd.append("file", new File([blob], "upload.webp", { type: "image/webp" }));
       const res = await fetch("/api/upload", { method: "POST", body: fd });
       const d = await res.json();
@@ -155,11 +171,18 @@ function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
           </div>
         </div>
       </div>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value.slice(0, 40))}
+        placeholder="שם לקרדיט בפיד (אופציונלי)"
+        className="w-full mt-3 rounded-btn border border-brand-line px-4 py-2.5 text-sm"
+      />
       <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
       <button
         onClick={() => inputRef.current?.click()}
         disabled={state === "working"}
-        className="w-full mt-3 rounded-btn py-3 font-extrabold bg-brand-green text-white disabled:opacity-60"
+        className="w-full mt-2 rounded-btn py-3 font-extrabold bg-brand-green text-white disabled:opacity-60"
       >
         {state === "working" ? "מעלה…" : "בחירת תמונה"}
       </button>
