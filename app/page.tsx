@@ -82,43 +82,62 @@ export default function Home() {
       />
 
       {/* ===== HERO ===== */}
-      <header className="bg-brand-green text-white px-5 pt-7 pb-9 relative overflow-hidden md:rounded-b-[32px]">
-        <span className="cube cube-lg absolute left-5 top-6 rotate-[-12deg] opacity-95" aria-hidden />
-        <span
-          className="cube absolute left-16 top-20 rotate-[18deg] opacity-85"
-          style={{ width: 34, height: 34, borderRadius: 10 }}
-          aria-hidden
-        />
-        <div className="text-xs font-extrabold text-brand-yellow tracking-wide mb-4">
-          SIMPLIIGOOD
-        </div>
-        <h1 className="text-[31px] md:text-[44px] font-black leading-[1.15]">
-          2 מנות ביום.
-          <br />
-          <span className="text-brand-yellow">ככה פשוט.</span>
-        </h1>
-        <p className="text-sm md:text-base text-[#BFD4D2] mt-2.5 max-w-md">
-          כל הדרכים לשלב ספירולינה טרייה ביומיום — בלי להיות שף ובלי לשנות הרגלים.
-        </p>
-        <div className="mt-5 flex flex-wrap items-center gap-3">
-          <a
-            href="#recipes"
-            className="inline-block bg-brand-yellow text-brand-green font-extrabold rounded-btn px-8 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
-          >
-            גלו איך מתחילים ↓
-          </a>
-          <Link
-            href="/journey"
-            className="inline-flex items-center gap-1.5 text-brand-yellow font-bold text-sm underline underline-offset-4"
-          >
-            🔥 המסע שלי — אתגר 14 יום
-          </Link>
-          <Link
-            href="/feed"
-            className="inline-flex items-center gap-1.5 text-brand-yellow font-bold text-sm underline underline-offset-4"
-          >
-            📸 פיד הקהילה
-          </Link>
+      <header className="relative overflow-hidden text-white md:rounded-b-[36px]">
+        {/* רקע — גרדיאנט עומק */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1C525C] via-brand-green to-[#0B2B30]" aria-hidden />
+
+        <div className="relative max-w-5xl mx-auto px-5 pt-8 pb-9 md:px-10 md:pt-12 md:pb-14 md:grid md:grid-cols-2 md:gap-8 md:items-center">
+          {/* טקסט */}
+          <div className="text-center md:text-right">
+            <div className="text-[11px] font-black text-brand-yellow tracking-[0.25em] mb-3">
+              SIMPLIIGOOD
+            </div>
+            <span className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-full px-3 py-1 text-[11px] font-bold text-white/90 mb-4 backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow" aria-hidden />
+              ספירולינה טרייה-קפואה · בלי חימום
+            </span>
+            <h1 className="text-[34px] md:text-[48px] font-black leading-[1.08]">
+              2 מנות ביום.
+              <br />
+              <span className="text-brand-yellow">ככה פשוט.</span>
+            </h1>
+            <p className="text-sm md:text-base text-[#C4DAD6] mt-3 max-w-md mx-auto md:mx-0">
+              כל הדרכים לשלב ספירולינה טרייה ביומיום — בלי להיות שף ובלי לשנות הרגלים.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+              <a
+                href="#recipes"
+                className="inline-block bg-brand-yellow text-brand-green font-extrabold rounded-btn px-7 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
+              >
+                גלו איך מתחילים ↓
+              </a>
+              <Link
+                href="/journey"
+                className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-btn px-4 py-3 text-sm font-bold hover:bg-white/15 transition-colors"
+              >
+                🔥 המסע שלי
+              </Link>
+              <Link
+                href="/feed"
+                className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-btn px-4 py-3 text-sm font-bold hover:bg-white/15 transition-colors"
+              >
+                📸 פיד הקהילה
+              </Link>
+            </div>
+          </div>
+
+          {/* מנת המוצר — עם הילה קרה שמפרידה אותה מהרקע */}
+          <div className="relative mt-9 md:mt-0 flex justify-center">
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
+              <div className="w-[92%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(190,235,222,0.6),rgba(127,209,185,0.18)_45%,transparent_68%)] blur-2xl" />
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/product/portion-3q.webp"
+              alt="מנת ספירולינה טרייה-קפואה של SimpliiGood"
+              className="relative w-[80%] max-w-[340px] md:w-full md:max-w-[440px] drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)]"
+            />
+          </div>
         </div>
       </header>
 
