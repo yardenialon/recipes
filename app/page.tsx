@@ -19,6 +19,59 @@ function recipeJsonLd() {
   };
 }
 
+/* ===== אייקוני SVG מותאמים למותג (במקום אמוג'ים) ===== */
+const cubeGrad = (id: string) => (
+  <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stopColor="#147a63" />
+    <stop offset="0.6" stopColor="#0E5B4A" />
+    <stop offset="1" stopColor="#0A4237" />
+  </linearGradient>
+);
+
+function IconThaw() {
+  return (
+    <svg viewBox="0 0 48 48" className="w-8 h-8" fill="none" aria-hidden>
+      <defs>{cubeGrad("thawG")}</defs>
+      <rect x="8" y="11" width="22" height="22" rx="7" fill="url(#thawG)" />
+      <path d="M13 17.5c1.8-1.9 3.8-2.6 6-2.6" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
+      <path d="M18.5 38c1.9 0 3.2-1.4 3.2-3.1 0-1.7-2.3-3.9-3.2-5-.9 1.1-3.2 3.3-3.2 5 0 1.7 1.3 3.1 3.2 3.1z" fill="#7FC6B0" />
+      <circle cx="34" cy="34" r="9.5" fill="#FEE62D" />
+      <path d="M34 29.2V34l3.2 2.1" stroke="#154048" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconTwoCubes() {
+  return (
+    <svg viewBox="0 0 48 48" className="w-8 h-8" fill="none" aria-hidden>
+      <defs>{cubeGrad("twoG")}</defs>
+      <rect x="7" y="20" width="19" height="19" rx="6" fill="url(#twoG)" />
+      <rect x="22" y="9" width="19" height="19" rx="6" fill="url(#twoG)" stroke="#EAF3EF" strokeWidth="2" />
+      <path d="M12 25.5c1.6-1.7 3.4-2.3 5.4-2.3" stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
+      <path d="M27 14.5c1.6-1.7 3.4-2.3 5.4-2.3" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconCold() {
+  return (
+    <svg viewBox="0 0 48 48" className="w-8 h-8" fill="none" aria-hidden>
+      <g stroke="#0E5B4A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M24 7v34" />
+        <path d="M9.3 15.5 38.7 32.5" />
+        <path d="M38.7 15.5 9.3 32.5" />
+        <path d="M24 13.5l-3.4-2.6M24 13.5l3.4-2.6" />
+        <path d="M24 34.5l-3.4 2.6M24 34.5l3.4 2.6" />
+        <path d="M13.7 20.6l-4.2-.2M13.7 20.6l-1-4.1" />
+        <path d="M34.3 27.4l4.2.2M34.3 27.4l1 4.1" />
+        <path d="M34.3 20.6l1-4.1M34.3 20.6l4.2-.2" />
+        <path d="M13.7 27.4l-1 4.1M13.7 27.4l-4.2.2" />
+      </g>
+      <circle cx="24" cy="24" r="3.3" fill="#FEE62D" />
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <main className="max-w-5xl mx-auto">
@@ -69,18 +122,23 @@ export default function Home() {
       </header>
 
       {/* ===== 3 דברים שחייבים לדעת ===== */}
-      <section className="bg-brand-mint px-4 py-5 md:rounded-card md:mt-4 md:mx-4">
-        <h2 className="text-lg font-black mb-3.5">3 דברים שחייבים לדעת</h2>
-        <div className="grid grid-cols-3 gap-2">
+      <section className="bg-brand-mint px-4 py-6 md:rounded-card md:mt-4 md:mx-4">
+        <h2 className="text-lg font-black mb-4">3 דברים שחייבים לדעת</h2>
+        <div className="grid grid-cols-3 gap-2.5">
           {[
-            { e: "🧊", t: "מפשירים", s: "5 דק' בחוץ" },
-            { e: "✌️", t: "2 קוביות", s: "המינון היומי" },
-            { e: "🥶", t: "בלי חימום", s: "רק קר" },
+            { icon: <IconThaw />, t: "מפשירים", s: "3 דקות" },
+            { icon: <IconTwoCubes />, t: "2 קוביות", s: "המינון היומי" },
+            { icon: <IconCold />, t: "בלי חימום", s: "רק קר" },
           ].map((k) => (
-            <div key={k.t} className="bg-white rounded-2xl px-2 py-3 text-center shadow-card">
-              <div className="text-2xl" aria-hidden>{k.e}</div>
-              <div className="font-bold text-[13px] mt-1.5">{k.t}</div>
-              <div className="text-[11px] text-brand-soft">{k.s}</div>
+            <div
+              key={k.t}
+              className="bg-white rounded-card px-2 py-4 text-center shadow-card border border-brand-line/70"
+            >
+              <div className="mx-auto w-14 h-14 rounded-full bg-brand-mint flex items-center justify-center ring-1 ring-brand-line">
+                {k.icon}
+              </div>
+              <div className="font-black text-[13px] mt-2.5 text-brand-green">{k.t}</div>
+              <div className="text-[11px] text-brand-soft mt-0.5">{k.s}</div>
             </div>
           ))}
         </div>
