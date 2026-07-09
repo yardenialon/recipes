@@ -59,6 +59,12 @@ export default function Home() {
           >
             🔥 המסע שלי — אתגר 14 יום
           </Link>
+          <Link
+            href="/feed"
+            className="inline-flex items-center gap-1.5 text-brand-yellow font-bold text-sm underline underline-offset-4"
+          >
+            📸 פיד הקהילה
+          </Link>
         </div>
       </header>
 
