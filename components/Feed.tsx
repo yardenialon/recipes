@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { INSTAGRAM_URL } from "@/lib/recipes";
 
 interface FeedItem {
   id: number;
@@ -37,6 +38,14 @@ export default function Feed() {
         </Link>
         <h1 className="text-[28px] md:text-[38px] font-black mt-3">פיד הקהילה</h1>
         <p className="text-sm text-[#BFD4D2] mt-1">מה שאתם מכינים עם ספירולינה טרייה</p>
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-3 text-[13px] text-brand-yellow font-bold underline underline-offset-4"
+        >
+          עקבו באינסטגרם @simpliigood 📸
+        </a>
       </header>
 
       <div className="px-4 mt-5">

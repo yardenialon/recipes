@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CHALLENGE_DAYS, EMPTY_PROGRESS, getDeviceId, type Progress } from "@/lib/challenge";
 import { badgeStatus, rewardStatus, REWARD } from "@/lib/rewards";
 import { resizeImage, UPLOAD_POINTS } from "@/lib/upload";
-import { WHATSAPP_LINK, SHOP_LINK } from "@/lib/recipes";
+import { WHATSAPP_LINK, SHOP_LINK, INSTAGRAM_URL, SHARE_CAPTION } from "@/lib/recipes";
 
 function Stat({ emoji, value, label }: { emoji: string; value: number; label: string }) {
   return (
@@ -116,7 +116,41 @@ function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
   const [state, setState] = useState<"idle" | "working" | "done" | "error">("idle");
   const [msg, setMsg] = useState("");
   const [name, setName] = useState("");
+  const [shareBlob, setShareBlob] = useState<Blob | null>(null);
+  const [shareMsg, setShareMsg] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  async function shareToInstagram() {
+    // Web Share עם הקובץ (מובייל) — המשתמש בוחר Instagram; אחרת נפילה לחלופה
+    try {
+      if (shareBlob && typeof navigator !== "undefined" && navigator.canShare) {
+        const file = new File([shareBlob], "simpliigood.webp", { type: "image/webp" });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], text: SHARE_CAPTION, title: "SimpliiGood" });
+          return;
+        }
+      }
+    } catch {
+      /* המשתמש ביטל או שאין תמיכה — ממשיכים לחלופה */
+    }
+    // חלופה: מעתיקים את הכיתוב ופותחים את הפרופיל כדי להדביק
+    try {
+      await navigator.clipboard?.writeText(SHARE_CAPTION);
+      setShareMsg("הכיתוב הועתק — הדביקו באינסטגרם ותייגו @simpliigood");
+    } catch {
+      setShareMsg("תייגו אותנו @simpliigood ותשתמשו ב-#SimpliiGood");
+    }
+    window.open(INSTAGRAM_URL, "_blank", "noopener,noreferrer");
+  }
+
+  async function copyCaption() {
+    try {
+      await navigator.clipboard?.writeText(SHARE_CAPTION);
+      setShareMsg("הכיתוב הועתק ✓");
+    } catch {
+      setShareMsg(SHARE_CAPTION);
+    }
+  }
 
   useEffect(() => {
     try {
@@ -148,6 +182,8 @@ function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
       const d = await res.json();
       if (!res.ok || !d?.ok) throw new Error(d?.error || "failed");
       if (d.progress) onProgress(d.progress as Progress);
+      setShareBlob(blob);
+      setShareMsg("");
       setState("done");
       setMsg(
         d.awarded
@@ -195,6 +231,32 @@ function UploadCard({ onProgress }: { onProgress: (p: Progress) => void }) {
           {msg}
         </div>
       )}
+
+      {state === "done" && (
+        <div className="mt-3 border-t border-brand-line pt-3">
+          <div className="text-[13px] font-extrabold text-center mb-2">
+            שתפו בסטורי ותייגו אותנו 💚
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={shareToInstagram}
+              className="flex-1 rounded-btn py-2.5 font-extrabold text-sm bg-brand-green text-white"
+            >
+              שיתוף לאינסטגרם 📸
+            </button>
+            <button
+              onClick={copyCaption}
+              className="rounded-btn py-2.5 px-4 font-bold text-sm bg-brand-mint text-brand-green"
+            >
+              העתק כיתוב
+            </button>
+          </div>
+          <div className="text-[11px] text-brand-soft mt-2 text-center">
+            {shareMsg || "תייגו @simpliigood + #SimpliiGood — ואולי תופיעו בפיד שלנו"}
+          </div>
+        </div>
+      )}
+
       <p className="text-[11px] text-brand-soft mt-2 text-center">
         המדיה נבדקת לפני שהיא מוצגת. בהעלאה אתם מאשרים שהתוכן שלכם ומתאים לשיתוף.
       </p>
