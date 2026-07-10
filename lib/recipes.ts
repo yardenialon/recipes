@@ -173,3 +173,9 @@ export const WHATSAPP_LINK =
   "https://api.whatsapp.com/send?phone=972545403255&text=SimpliiGood%20%D7%94%D7%99%D7%99%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%A4%D7%99%D7%A8%D7%95%D7%9C%D7%99%D7%A0%D7%94%20%D7%A9%D7%9C%20";
 export const SHOP_LINK = "https://simpliigood.co.il/";
 export const STORE_LOCATOR_LINK = "https://simpliigood.co.il/pages/store-locator";
+
+// רשתות חברתיות — לשיתוף ותיוג
+export const INSTAGRAM_URL = "https://instagram.com/simpliigood";
+export const INSTAGRAM_HANDLE = "@simpliigood";
+export const SHARE_HASHTAG = "#SimpliiGood";
+export const SHARE_CAPTION = "ספירולינה טרייה של @simpliigood 💚 #SimpliiGood";
