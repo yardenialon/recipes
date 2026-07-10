@@ -16,7 +16,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const DEFAULT_URL = "https://flashyapp.com/api/v1.0/create_contact";
+const DEFAULT_URL = "https://api.flashy.app/contact?overwrite=true";
 
 function config() {
   return {
@@ -71,12 +71,18 @@ export async function POST(req: NextRequest) {
   try {
     const res = await fetch(c.url, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-api-key": c.key,
+      },
       body: JSON.stringify({
-        api_key: c.key,
-        phone,
-        first_name: name || undefined,
-        subscribe: [c.list],
+        primary_key: "phone",
+        contact: {
+          phone,
+          first_name: name || undefined,
+          lists: { [c.list]: 1 },
+        },
       }),
     });
     upstreamStatus = res.status;
