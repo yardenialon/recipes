@@ -31,7 +31,13 @@ npm run dev
    - `NEXT_PUBLIC_SUPABASE_URL` — מ-Project Settings → API
    - `SUPABASE_SERVICE_ROLE_KEY` — service_role key (סודי! לעולם לא בצד לקוח — אצלנו הוא רק ב-API routes)
    - `ADMIN_TOKEN` — סיסמה אקראית וחזקה לפאנל האדמין (`/admin`). בלעדיה הפאנל מושבת.
+   - `FLASHY_API_KEY` — מפתח Flashy לתזכורות וואטסאפ (`/api/subscribe`). בלעדיו טופס ההרשמה מושבת.
+   - `FLASHY_LIST` — שם הרשימה ב-Flashy (ברירת מחדל `challenge-14`); `FLASHY_API_URL` — override ל-endpoint אם צריך.
 4. Redeploy.
+
+תזכורות וואטסאפ: הטופס במסך `/journey` דוחף איש קשר לרשימה ב-Flashy (עם הסכמה מפורשת);
+אוטומציית 14 יום מוגדרת בצד Flashy על הצטרפות לרשימה. אימות מהיר: `GET /api/subscribe`
+מחזיר `{ hasKey, list, apiUrl }`, והתשובה ל-POST כוללת `upstreamStatus` של Flashy.
 
 ### פאנל אדמין ופיד
 

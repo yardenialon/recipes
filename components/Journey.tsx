@@ -6,6 +6,7 @@ import { CHALLENGE_DAYS, EMPTY_PROGRESS, getDeviceId, type Progress } from "@/li
 import { badgeStatus, rewardStatus, REWARD } from "@/lib/rewards";
 import { resizeImage, UPLOAD_POINTS } from "@/lib/upload";
 import { WHATSAPP_LINK, SHOP_LINK, INSTAGRAM_URL, SHARE_CAPTION } from "@/lib/recipes";
+import SubscribeCard from "./SubscribeCard";
 
 function Stat({ emoji, value, label }: { emoji: string; value: number; label: string }) {
   return (
@@ -407,6 +408,7 @@ export default function Journey() {
             <StartCard />
           )}
 
+          <SubscribeCard />
           <RewardCard points={p.points} />
           <UploadCard onProgress={setProgress} />
 
