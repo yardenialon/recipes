@@ -42,8 +42,23 @@ export default function SubscribeCard() {
         body: JSON.stringify({ phone, name: name.trim(), consent: true }),
       });
       const d = await res.json();
-      if (res.status === 503) throw new Error("התזכורות עדיין לא פעילות. נסו שוב מאוחר יותר.");
-      if (!res.ok || !d?.ok) throw new Error(d?.error === "invalid phone" ? "מספר טלפון לא תקין" : "ההרשמה נכשלה, נסו שוב");
+      if (res.status === 503) {
+        setErr("התזכורות עדיין לא פעילות. נסו שוב מאוחר יותר.");
+        setState("idle");
+        return;
+      }
+      if (!res.ok || !d?.ok) {
+        // אבחון זמני — חושף מה Flashy החזיר כדי לתקן את ה-endpoint
+        const dbg =
+          d?.upstreamStatus !== undefined
+            ? ` [Flashy ${d.upstreamStatus}: ${String(d.upstreamBody ?? "").slice(0, 160)}]`
+            : d?.detail
+              ? ` [${d.detail}]`
+              : "";
+        setErr((d?.error === "invalid phone" ? "מספר טלפון לא תקין" : "ההרשמה נכשלה") + dbg);
+        setState("idle");
+        return;
+      }
       try {
         localStorage.setItem(KEY, "1");
       } catch {
@@ -118,7 +133,7 @@ export default function SubscribeCard() {
         >
           {state === "working" ? "רושם…" : "שלחו לי תזכורת יומית"}
         </button>
-        {err && <div className="text-xs text-red-500 font-bold mt-2 text-center">{err}</div>}
+        {err && <div className="text-xs text-red-500 font-bold mt-2 text-center break-words">{err}</div>}
       </form>
     </div>
   );
