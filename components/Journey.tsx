@@ -313,7 +313,7 @@ export default function Journey() {
       return;
     }
     let active = true;
-    fetch(`/api/progress?device=${encodeURIComponent(id)}`)
+    fetch(`/api/progress?device=${encodeURIComponent(id)}`, { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (active) setProgress(d?.progress ?? EMPTY_PROGRESS);
