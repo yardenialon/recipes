@@ -67,7 +67,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "not configured" }, { status: 503 });
   }
 
-  let upstreamStatus = 0;
   try {
     const res = await fetch(c.url, {
       method: "POST",
@@ -85,22 +84,14 @@ export async function POST(req: NextRequest) {
         },
       }),
     });
-    upstreamStatus = res.status;
-    const upstreamBody = (await res.text()).slice(0, 400);
     if (!res.ok) {
-      console.error("flashy subscribe failed", res.status, upstreamBody);
-      return NextResponse.json(
-        { ok: false, error: "subscribe failed", upstreamStatus, upstreamBody },
-        { status: 502 }
-      );
+      const snippet = (await res.text()).slice(0, 300);
+      console.error("flashy subscribe failed", res.status, snippet);
+      return NextResponse.json({ ok: false, error: "subscribe failed" }, { status: 502 });
     }
-    // חלק מה-APIים מחזירים 200 עם שגיאה בגוף — נחשוף גם את זה לאבחון
-    return NextResponse.json({ ok: true, upstreamStatus, upstreamBody });
+    return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("flashy request error", String(e).slice(0, 200));
-    return NextResponse.json(
-      { ok: false, error: "network", detail: String(e).slice(0, 200) },
-      { status: 502 }
-    );
+    return NextResponse.json({ ok: false, error: "network" }, { status: 502 });
   }
 }
