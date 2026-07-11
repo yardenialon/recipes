@@ -142,6 +142,45 @@ export default function Home() {
         </div>
       </header>
 
+      {/* ===== איך מצטרפים לאתגר ===== */}
+      <section className="px-4 pt-6 md:mx-4">
+        <h2 className="text-lg md:text-xl font-black text-center">איך מצטרפים לאתגר? 🌱</h2>
+        <p className="text-[13px] text-brand-soft text-center mt-1 mb-4 max-w-md mx-auto">
+          14 יום, מנה ירוקה כל בוקר — ואנחנו מזכירים לכם. פשוט ככה:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            { e: "📲", t: "מצטרפים", d: "משאירים טלפון — ומקבלים מתכון קצר כל בוקר בוואטסאפ" },
+            { e: "🥤", t: "מכינים", d: "2 מנות ספירולינה במתכון של 10 שניות שאוהבים" },
+            { e: "🔥", t: 'מסמנים "הכנתי!"', d: "צוברים רצף ימים, נקודות ותגים — עד קופון" },
+          ].map((s, i) => (
+            <div
+              key={s.t}
+              className="bg-white rounded-card shadow-card p-4 flex items-center gap-3 sm:flex-col sm:text-center border border-brand-line/70"
+            >
+              <div className="w-10 h-10 rounded-full bg-brand-green text-brand-yellow font-black text-lg flex items-center justify-center shrink-0">
+                {i + 1}
+              </div>
+              <div className="sm:mt-1">
+                <div className="font-extrabold text-[14px]">
+                  <span aria-hidden>{s.e}</span> {s.t}
+                </div>
+                <div className="text-[12px] text-brand-soft mt-0.5 leading-snug">{s.d}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-5">
+          <a
+            href="#join"
+            className="inline-block bg-brand-yellow text-brand-green font-extrabold rounded-btn px-8 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
+          >
+            מצטרפים לאתגר 💬
+          </a>
+          <p className="text-[12px] text-brand-soft mt-2">בחינם · מתחילים היום · אפשר להסיר בכל עת</p>
+        </div>
+      </section>
+
       {/* ===== 3 דברים שחייבים לדעת ===== */}
       <section className="bg-brand-mint px-4 py-6 md:rounded-card md:mt-4 md:mx-4">
         <h2 className="text-lg font-black mb-4">3 דברים שחייבים לדעת</h2>
