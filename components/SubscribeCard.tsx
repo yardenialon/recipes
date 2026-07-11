@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { getDeviceId, setDeviceId } from "@/lib/challenge";
 
 const KEY = "sg_subscribed";
 
@@ -46,7 +47,7 @@ export default function SubscribeCard() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, name: name.trim(), consent: true }),
+        body: JSON.stringify({ phone, name: name.trim(), consent: true, deviceId: getDeviceId() }),
       });
       const d = await res.json();
       if (res.status === 503) {
@@ -59,6 +60,8 @@ export default function SubscribeCard() {
         setState("idle");
         return;
       }
+      // עוברים לזהות-הטלפון — מכאן המסע עוקב אחרי המשתמש בכל מכשיר
+      if (typeof d.deviceId === "string") setDeviceId(d.deviceId);
       try {
         localStorage.setItem(KEY, "1");
       } catch {

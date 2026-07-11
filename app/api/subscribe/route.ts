@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHash } from "crypto";
+import { supabaseEnv } from "@/lib/supabaseServer";
 
 /**
  * POST /api/subscribe — רישום לתזכורות וואטסאפ יומיות דרך Flashy.
@@ -44,7 +46,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  let body: { phone?: unknown; name?: unknown; consent?: unknown };
+  let body: { phone?: unknown; name?: unknown; consent?: unknown; deviceId?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -89,7 +91,34 @@ export async function POST(req: NextRequest) {
       console.error("flashy subscribe failed", res.status, snippet);
       return NextResponse.json({ ok: false, error: "subscribe failed" }, { status: 502 });
     }
-    return NextResponse.json({ ok: true });
+
+    // איחוד זהות: מזהה יציב מ-hash לא-הפיך של הטלפון + מיזוג ההתקדמות האנונימית.
+    // מחזירים deviceId חדש כדי שהלקוח יעבור אליו — כך המסע עוקב בכל מכשיר.
+    let deviceId: string | null = null;
+    const sb = supabaseEnv();
+    if (sb) {
+      const phoneId = "p_" + createHash("sha256").update(phone + sb.key).digest("hex").slice(0, 40);
+      const anon =
+        typeof body?.deviceId === "string" && body.deviceId.length >= 8 && body.deviceId.length <= 64
+          ? body.deviceId
+          : phoneId;
+      try {
+        await fetch(`${sb.url}/rest/v1/rpc/link_phone`, {
+          method: "POST",
+          headers: {
+            apikey: sb.key,
+            Authorization: `Bearer ${sb.key}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ p_device_id: anon, p_phone_id: phoneId }),
+        });
+      } catch {
+        // מיזוג נכשל — עדיין עוברים לזהות-הטלפון (ההתקדמות תיצבר מכאן)
+      }
+      deviceId = phoneId;
+    }
+    return NextResponse.json({ ok: true, deviceId });
   } catch (e) {
     console.error("flashy request error", String(e).slice(0, 200));
     return NextResponse.json({ ok: false, error: "network" }, { status: 502 });
