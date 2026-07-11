@@ -93,7 +93,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מערבבים מנה מופשרת בחלק מהיוגורט לפס ירוק", "מוסיפים את שאר היוגורט בשכבות", "מפזרים גרנולה ומזליפים סילן"],
     nutrition: "חלבון ~22 גר' · ברזל · B12",
     tags: ["חלבון", "פיטנס", "ילדים"],
-    baseMadeCount: 64, image: null,
+    baseMadeCount: 64, image: "/recipes/protein-yogurt-pro.webp",
   },
   // ===== רמה 2 — דקה =====
   {
@@ -124,7 +124,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מכניסים את כל המרכיבים לבלנדר חזק", "טוחנים 30–45 שניות עד מרקם חלק וקרמי", "מוסיפים מעט חלב להתאמת הסמיכות ומגישים מיד"],
     nutrition: "חלבון · ברזל · ויטמין C",
     tags: ["טבעוני", "פיטנס"],
-    baseMadeCount: 58, image: null,
+    baseMadeCount: 58, image: "/recipes/green-bali-shake.webp",
   },
   {
     slug: "green-garden-bowl",
@@ -134,7 +134,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מוזגים חלב שקדים לבלנדר ומוסיפים תרד, תמר, ספירולינה ובננה", "טוחנים עד מרקם סמיך וקרמי (מכווננים בחלב או בננה/קרח)", "מעבירים לקערה, מסדרים תוספות ומגישים מיד"],
     nutrition: "ברזל · סיבים · חלבון",
     tags: ["אינסטגרם", "ילדים", "טבעוני"],
-    baseMadeCount: 71, image: null,
+    baseMadeCount: 71, image: "/recipes/green-garden-bowl.webp",
   },
   {
     slug: "green-day-shake",
@@ -144,7 +144,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מוזגים מיץ תפוזים לבלנדר", "מוסיפים תרד, נענע, תפוח, בננה, צ'יה וספירולינה", "טוחנים 30–45 שניות; אפשר להוסיף קרח ולטחון שוב, ומגישים מיד"],
     nutrition: "ויטמין C · ברזל · נוגדי חמצון",
     tags: ["טבעוני", "דיטוקס"],
-    baseMadeCount: 49, image: null,
+    baseMadeCount: 49, image: "/recipes/green-day-shake.webp",
   },
   {
     slug: "tropical-green-shake",
@@ -154,7 +154,7 @@ export const RECIPES: Recipe[] = [
     steps: ["מוזגים מי קוקוס לבלנדר", "מוסיפים בננה, אננס, תפוח, ספירולינה, לימון, דבש, בזיליקום ונענע", "טוחנים 30–45 שניות, מאזנים בדבש/לימון ומגישים מיד"],
     nutrition: "ויטמין C · אלקטרוליטים · ברזל",
     tags: ["טבעוני", "קיץ"],
-    baseMadeCount: 63, image: null,
+    baseMadeCount: 63, image: "/recipes/tropical-green-shake.webp",
   },
   // ===== רמה 3 — 5 דקות =====
   {
