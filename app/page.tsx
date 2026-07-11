@@ -1,6 +1,7 @@
 import Link from "next/link";
 import RecipeExplorer from "@/components/RecipeExplorer";
 import Faq from "@/components/Faq";
+import SubscribeCard from "@/components/SubscribeCard";
 import { RECIPES, WHATSAPP_LINK, SHOP_LINK, STORE_LOCATOR_LINK } from "@/lib/recipes";
 
 /** Schema.org Recipe markup — נכס ה-SEO המרכזי של פאזה 1 */
@@ -106,22 +107,22 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
               <a
-                href="#recipes"
+                href="#join"
                 className="inline-block bg-brand-yellow text-brand-green font-extrabold rounded-btn px-7 py-3.5 shadow-btn transition-transform active:scale-[0.97]"
               >
-                גלו איך מתחילים ↓
+                הצטרפו לאתגר — מתכון כל בוקר 💬
+              </a>
+              <a
+                href="#recipes"
+                className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-btn px-4 py-3 text-sm font-bold hover:bg-white/15 transition-colors"
+              >
+                לכל המתכונים ↓
               </a>
               <Link
                 href="/journey"
                 className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-btn px-4 py-3 text-sm font-bold hover:bg-white/15 transition-colors"
               >
                 🔥 המסע שלי
-              </Link>
-              <Link
-                href="/feed"
-                className="inline-flex items-center gap-1.5 bg-white/10 ring-1 ring-white/15 rounded-btn px-4 py-3 text-sm font-bold hover:bg-white/15 transition-colors"
-              >
-                📸 פיד הקהילה
               </Link>
             </div>
           </div>
@@ -173,37 +174,48 @@ export default function Home() {
         <Faq />
       </section>
 
-      {/* ===== וואטסאפ + חנות ===== */}
-      <section className="px-4 py-6">
-        <div className="bg-brand-green rounded-card text-center text-white px-5 py-7">
-          <h2 className="text-xl font-black">מתכון ירוק כל בוקר 💬</h2>
-          <p className="text-[13px] text-[#BFD4D2] mt-1.5 mb-4">
-            מצטרפים לקהילת הוואטסאפ ומקבלים רעיון יומי של 10 שניות
+      {/* ===== הצטרפות לאתגר (מתכון יומי בוואטסאפ) ===== */}
+      <section id="join" className="px-4 py-6 scroll-mt-4">
+        <div className="bg-brand-green rounded-card text-white px-5 py-7">
+          <h2 className="text-xl md:text-2xl font-black text-center">
+            מתכון כל בוקר בוואטסאפ 💬
+          </h2>
+          <p className="text-[13px] text-[#BFD4D2] mt-1.5 text-center max-w-sm mx-auto">
+            הצטרפו לאתגר 14 יום — כל בוקר מתכון של 10 שניות ותזכורת קטנה, ישר לוואטסאפ.
           </p>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-brand-yellow text-brand-green font-extrabold rounded-btn py-3.5"
-          >
-            אני בפנים
-          </a>
-          <a
-            href={SHOP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block border-2 border-white/70 text-white font-bold rounded-btn py-3 mt-2.5"
-          >
-            לרכישה באתר
-          </a>
-          <a
-            href={STORE_LOCATOR_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block text-[13px] text-brand-yellow font-bold underline underline-offset-4 mt-3.5"
-          >
-            איפה לקנות ספירולינה סביבך? 📍
-          </a>
+
+          <div className="max-w-md mx-auto">
+            <SubscribeCard />
+          </div>
+
+          <div className="max-w-md mx-auto mt-4">
+            <a
+              href={SHOP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block border-2 border-white/70 text-white font-bold rounded-btn py-3 text-center"
+            >
+              לרכישה באתר
+            </a>
+            <div className="flex items-center justify-center flex-wrap gap-x-5 gap-y-1 mt-3 text-[13px]">
+              <a
+                href={STORE_LOCATOR_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-yellow font-bold underline underline-offset-4"
+              >
+                איפה לקנות סביבך? 📍
+              </a>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#BFD4D2] font-bold underline underline-offset-4"
+              >
+                יש שאלה? דברו איתנו
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
