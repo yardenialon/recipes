@@ -5,7 +5,9 @@ import Link from "next/link";
 import { Recipe, RECIPES } from "@/lib/recipes";
 import { getDeviceId, type Progress } from "@/lib/challenge";
 import { badgeJustEarned } from "@/lib/rewards";
+import { UPLOAD_POINTS } from "@/lib/upload";
 import RecipeCard, { CubesMeter, RecipePhoto } from "./RecipeCard";
+import UploadCard from "./UploadCard";
 
 const COLORS = ["#FEE62D", "#0E5B4A", "#154048", "#7FD1B9"];
 
@@ -153,7 +155,14 @@ export default function RecipeSheet({
               )}
             </div>
             <div className="p-5">
-              <div className="font-extrabold text-[15px] mb-3">אולי בא לך גם…</div>
+              {/* אימות ההכנה בתמונה — הצעד הטבעי אחרי "הכנתי!" */}
+              <UploadCard
+                onProgress={setProgress}
+                title="מאמתים בתמונה 📸"
+                subtitle={`צלמו את מה שהכנתם — עוד +${UPLOAD_POINTS} נקודות`}
+              />
+
+              <div className="font-extrabold text-[15px] mb-3 mt-5">אולי בא לך גם…</div>
               <div className="grid grid-cols-2 gap-2.5">
                 {suggestions.map((r) => (
                   <RecipeCard key={r.slug} recipe={r} onOpen={() => onOpenRecipe(r)} />
