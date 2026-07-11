@@ -67,6 +67,12 @@ export function getDeviceId(): string {
   }
 }
 
+/** מחליף את מזהה המכשיר (למשל לזהות-טלפון אחרי הרשמה) ומסנכרן לשני האחסונים. */
+export function setDeviceId(id: string) {
+  if (typeof window === "undefined" || !id || id.length < 8) return;
+  persist(id);
+}
+
 /** שורת DB גולמית (snake_case) כפי שמגיעה מ-PostgREST */
 export interface ProgressRow {
   days_completed?: number;

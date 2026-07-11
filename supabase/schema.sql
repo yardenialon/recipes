@@ -154,3 +154,59 @@ begin
   );
 end;
 $$;
+
+-- ---------- איחוד זהות לפי טלפון ----------
+-- ממזג את שורת המכשיר האנונימי (p_device_id) לשורת זהות-הטלפון (p_phone_id,
+-- שהוא hash לא-הפיך של הטלפון), כדי שהמסע יעקוב אחרי המשתמש בכל מכשיר.
+-- הטלפון עצמו לא נשמר — רק ה-hash שמגיע כ-device_id.
+create or replace function link_phone(p_device_id text, p_phone_id text)
+returns challenge_progress
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  d challenge_progress;
+  p challenge_progress;
+  r challenge_progress;
+begin
+  select * into p from challenge_progress where device_id = p_phone_id;
+
+  -- כבר מקושר (אותו מזהה) — אין מה למזג
+  if p_device_id = p_phone_id then
+    return p;
+  end if;
+
+  select * into d from challenge_progress where device_id = p_device_id;
+  if not found then
+    return p; -- אין התקדמות אנונימית להעביר
+  end if;
+
+  if p.device_id is null then
+    -- אין עדיין שורת טלפון: מעבירים את שורת המכשיר לזהות-הטלפון
+    insert into challenge_progress
+      (device_id, started_at, last_day, days_completed, current_streak, longest_streak, points, last_upload_day, updated_at)
+    values
+      (p_phone_id, d.started_at, d.last_day, d.days_completed, d.current_streak, d.longest_streak, d.points, d.last_upload_day, now())
+    returning * into r;
+  else
+    -- ממזגים את שתי השורות (greatest/least מדלגים על NULL)
+    update challenge_progress set
+      started_at      = least(p.started_at, d.started_at),
+      last_day        = greatest(p.last_day, d.last_day),
+      days_completed  = greatest(p.days_completed, d.days_completed),
+      current_streak  = greatest(p.current_streak, d.current_streak),
+      longest_streak  = greatest(p.longest_streak, d.longest_streak),
+      points          = p.points + d.points,
+      last_upload_day = greatest(p.last_upload_day, d.last_upload_day),
+      updated_at      = now()
+    where device_id = p_phone_id
+    returning * into r;
+  end if;
+
+  -- מוחקים את שורת המכשיר האנונימי כדי למנוע ספירה כפולה
+  delete from challenge_progress where device_id = p_device_id;
+
+  return r;
+end;
+$$;
