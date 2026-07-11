@@ -25,18 +25,42 @@ export const EMPTY_PROGRESS: Progress = {
 
 const DEVICE_KEY = "sg_device";
 
-/** מזהה אנונימי יציב למכשיר (נשמר ב-localStorage). "" בצד שרת. */
+function readCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const hit = document.cookie.split("; ").find((c) => c.startsWith(name + "="));
+  return hit ? decodeURIComponent(hit.slice(name.length + 1)) : null;
+}
+
+function persist(id: string) {
+  try {
+    localStorage.setItem(DEVICE_KEY, id);
+  } catch {
+    /* noop */
+  }
+  try {
+    // גיבוי ב-cookie (שנתיים) — שורד גם אם localStorage נמחק, ולהפך
+    document.cookie = `${DEVICE_KEY}=${id}; max-age=63072000; path=/; SameSite=Lax`;
+  } catch {
+    /* noop */
+  }
+}
+
+/**
+ * מזהה אנונימי יציב למכשיר. נשמר גם ב-localStorage וגם ב-cookie כדי לצמצם
+ * פיצול זהות באותו דפדפן. "" בצד שרת. (חוצה-מכשירים דורש התחברות/טלפון.)
+ */
 export function getDeviceId(): string {
   if (typeof window === "undefined") return "";
   try {
     let id = localStorage.getItem(DEVICE_KEY);
+    if (!id || id.length < 8) id = readCookie(DEVICE_KEY);
     if (!id || id.length < 8) {
       id =
         typeof crypto !== "undefined" && crypto.randomUUID
           ? crypto.randomUUID()
           : `d_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 12)}`;
-      localStorage.setItem(DEVICE_KEY, id);
     }
+    persist(id); // מסנכרן את שני האחסונים
     return id;
   } catch {
     return "";
