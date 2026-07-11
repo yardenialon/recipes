@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Recipe, RECIPES, WHATSAPP_LINK } from "@/lib/recipes";
+import { Recipe, RECIPES } from "@/lib/recipes";
 import { getDeviceId, type Progress } from "@/lib/challenge";
 import { badgeJustEarned } from "@/lib/rewards";
 import RecipeCard, { CubesMeter, RecipePhoto } from "./RecipeCard";
@@ -162,16 +162,15 @@ export default function RecipeSheet({
               <div className="bg-brand-green rounded-card text-center text-white p-5 mt-4">
                 <div className="font-black text-lg">רוצים כזה כל בוקר?</div>
                 <p className="text-[13px] text-[#BFD4D2] mt-1 mb-3.5">
-                  מתכון של 10 שניות, ישר לוואטסאפ, כל יום ב-7:00
+                  מתכון של 10 שניות, ישר לוואטסאפ, כל בוקר
                 </p>
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/#join"
+                  onClick={onClose}
                   className="block bg-brand-yellow text-brand-green font-extrabold rounded-btn py-3"
                 >
-                  שלחו לי מתכון יומי
-                </a>
+                  קבלו מתכון כל בוקר 💬
+                </Link>
               </div>
             </div>
           </div>

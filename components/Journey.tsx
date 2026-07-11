@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CHALLENGE_DAYS, EMPTY_PROGRESS, getDeviceId, type Progress } from "@/lib/challenge";
 import { badgeStatus, rewardStatus, REWARD } from "@/lib/rewards";
 import { resizeImage, UPLOAD_POINTS } from "@/lib/upload";
-import { WHATSAPP_LINK, SHOP_LINK, INSTAGRAM_URL, SHARE_CAPTION } from "@/lib/recipes";
+import { SHOP_LINK, INSTAGRAM_URL, SHARE_CAPTION } from "@/lib/recipes";
 import SubscribeCard from "./SubscribeCard";
 
 function Stat({ emoji, value, label }: { emoji: string; value: number; label: string }) {
@@ -279,14 +279,6 @@ function KeepGoingCard({ done }: { done: number }) {
       >
         למתכון של היום
       </Link>
-      <a
-        href={WHATSAPP_LINK}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block text-[13px] text-brand-yellow font-bold underline underline-offset-4 mt-3"
-      >
-        תזכורת יומית בוואטסאפ 💬
-      </a>
     </div>
   );
 }

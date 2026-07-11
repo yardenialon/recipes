@@ -9,19 +9,26 @@ export default function SubscribeCard() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [consent, setConsent] = useState(false);
-  const [state, setState] = useState<"idle" | "working" | "done" | "hidden">("idle");
+  const [state, setState] = useState<"idle" | "working" | "done" | "already">("idle");
   const [err, setErr] = useState("");
 
   useEffect(() => {
     try {
-      if (localStorage.getItem(KEY)) setState("hidden");
+      if (localStorage.getItem(KEY)) setState("already");
       setName(localStorage.getItem("sg_name") ?? "");
     } catch {
       /* noop */
     }
   }, []);
 
-  if (state === "hidden") return null;
+  if (state === "already") {
+    return (
+      <div className="bg-white rounded-card shadow-card p-4 mt-3 text-center">
+        <div className="text-sm font-extrabold text-brand-green">💬 רשום/ה לתזכורת היומית ✓</div>
+        <div className="text-[12px] text-brand-soft mt-0.5">נתראה כל בוקר בוואטסאפ</div>
+      </div>
+    );
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
