@@ -85,6 +85,16 @@ export const RECIPES: Recipe[] = [
     tags: ["טבעוני"],
     baseMadeCount: 77, image: "/recipes/green-hummus.webp",
   },
+  {
+    slug: "protein-yogurt-pro",
+    name: "יוגורט פרו ספירולינה",
+    level: 1, timeLabel: "1 דק'", cubes: 1, meal: "בוקר",
+    ingredients: ["גביע יוגורט חלבון (פרו, ~21 גר')", "מנה SimpliiGood מופשרת", "חופן גרנולה", "סילן (סירופ תמרים)"],
+    steps: ["מערבבים מנה מופשרת בחלק מהיוגורט לפס ירוק", "מוסיפים את שאר היוגורט בשכבות", "מפזרים גרנולה ומזליפים סילן"],
+    nutrition: "חלבון ~22 גר' · ברזל · B12",
+    tags: ["חלבון", "פיטנס", "ילדים"],
+    baseMadeCount: 64, image: null,
+  },
   // ===== רמה 2 — דקה =====
   {
     slug: "protein-banana-shake",
