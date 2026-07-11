@@ -48,14 +48,7 @@ export default function SubscribeCard() {
         return;
       }
       if (!res.ok || !d?.ok) {
-        // אבחון זמני — חושף מה Flashy החזיר כדי לתקן את ה-endpoint
-        const dbg =
-          d?.upstreamStatus !== undefined
-            ? ` [Flashy ${d.upstreamStatus}: ${String(d.upstreamBody ?? "").slice(0, 160)}]`
-            : d?.detail
-              ? ` [${d.detail}]`
-              : "";
-        setErr((d?.error === "invalid phone" ? "מספר טלפון לא תקין" : "ההרשמה נכשלה") + dbg);
+        setErr(d?.error === "invalid phone" ? "מספר טלפון לא תקין" : "ההרשמה נכשלה, נסו שוב");
         setState("idle");
         return;
       }
