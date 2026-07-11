@@ -65,7 +65,7 @@ export default function RecipeSheet({
 
     // מוסיפים את הספירה האמיתית מה-DB מעל מונה הבסיס (0 אם Supabase לא מחובר)
     let active = true;
-    fetch(`/api/made?slug=${encodeURIComponent(recipe.slug)}`)
+    fetch(`/api/made?slug=${encodeURIComponent(recipe.slug)}`, { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (active && d?.ok && typeof d.count === "number") {
