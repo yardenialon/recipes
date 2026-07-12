@@ -105,7 +105,8 @@ export default function SubscribeCard() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="מספר טלפון (05X-XXXXXXX)"
-          className="w-full rounded-btn border border-brand-line px-4 py-2.5 text-sm text-brand-green placeholder:text-brand-soft"
+          className="w-full rounded-btn border border-brand-line px-4 py-2.5 text-sm bg-white text-brand-green placeholder:text-brand-soft"
+          style={{ colorScheme: "light", WebkitTextFillColor: "#154048" }}
           dir="ltr"
         />
         <input
@@ -113,7 +114,8 @@ export default function SubscribeCard() {
           value={name}
           onChange={(e) => setName(e.target.value.slice(0, 40))}
           placeholder="שם (אופציונלי)"
-          className="w-full mt-2 rounded-btn border border-brand-line px-4 py-2.5 text-sm text-brand-green placeholder:text-brand-soft"
+          className="w-full mt-2 rounded-btn border border-brand-line px-4 py-2.5 text-sm bg-white text-brand-green placeholder:text-brand-soft"
+          style={{ colorScheme: "light", WebkitTextFillColor: "#154048" }}
         />
         <label className="flex items-start gap-2 mt-3 text-[12px] text-brand-soft cursor-pointer">
           <input
