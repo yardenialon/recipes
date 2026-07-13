@@ -29,6 +29,46 @@ export const REWARD = {
   label: "10% הנחה",
 };
 
+// ============================================================
+// מפת אבני-דרך של האתגר — מה זוכים בכל יום-מפתח.
+// מקור-אמת יחיד, מזין גם את הדף הראשי וגם את "המסע שלי".
+// ⚠️ שדות `code` הם PLACEHOLDERS — להחליף בקודי קופון אמיתיים
+//    מול SimpliiGood לפני שיווק.
+// ============================================================
+
+export type MilestoneKind = "badge" | "coupon" | "gift" | "grand";
+
+export interface Milestone {
+  id: string;
+  day: number;
+  kind: MilestoneKind;
+  title: string; // שם הפרס
+  detail: string; // תיאור קצר
+  code?: string; // קוד קופון (placeholder)
+}
+
+export const MILESTONES: Milestone[] = [
+  { id: "serious", day: 3, kind: "badge", title: "תג רצינות", detail: "3 ימים ברצף — נכנסת לקצב" },
+  { id: "off10", day: 5, kind: "coupon", title: "10% הנחה", detail: "קופון לרכישה באתר", code: "SIMPLII10" },
+  { id: "gift", day: 7, kind: "gift", title: "2 חבילות קרקר מתנה", detail: "שבוע שלם — המתנה עלינו", code: "SIMPLIICRACKER" },
+  { id: "off20", day: 10, kind: "coupon", title: "20% הנחה", detail: "קופון משודרג", code: "SIMPLII20" },
+  { id: "grand", day: 14, kind: "grand", title: "₪100 לרכישה באתר", detail: "סיימת את האתגר — כל הכבוד!", code: "SIMPLII100" },
+];
+
+export interface MilestoneStatus extends Milestone {
+  earned: boolean;
+}
+
+/** מצב אבני-הדרך לפי מספר הימים שהושלמו */
+export function milestoneStatus(daysCompleted: number): MilestoneStatus[] {
+  return MILESTONES.map((m) => ({ ...m, earned: daysCompleted >= m.day }));
+}
+
+/** אבן-הדרך הבאה שטרם הושגה (למסרים מוטיבציוניים) */
+export function nextMilestone(daysCompleted: number): Milestone | null {
+  return MILESTONES.find((m) => daysCompleted < m.day) ?? null;
+}
+
 export interface EarnedBadge extends Badge {
   earned: boolean;
 }
