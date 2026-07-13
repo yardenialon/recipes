@@ -2,6 +2,7 @@ import Link from "next/link";
 import RecipeExplorer from "@/components/RecipeExplorer";
 import Faq from "@/components/Faq";
 import SubscribeCard from "@/components/SubscribeCard";
+import RewardsRoadmap from "@/components/RewardsRoadmap";
 import { RECIPES, WHATSAPP_LINK, SHOP_LINK, STORE_LOCATOR_LINK } from "@/lib/recipes";
 
 /** Schema.org Recipe markup — נכס ה-SEO המרכזי של פאזה 1 */
@@ -127,17 +128,35 @@ export default function Home() {
             </div>
           </div>
 
-          {/* מנת המוצר — עם הילה קרה שמפרידה אותה מהרקע */}
-          <div className="relative mt-9 md:mt-0 flex justify-center">
-            <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-              <div className="w-[92%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(190,235,222,0.6),rgba(127,209,185,0.18)_45%,transparent_68%)] blur-2xl" />
+          {/* מנת המוצר — מרחפת מעל הילה קרה, עם כיתוב שמסביר מה זה */}
+          <div className="relative mt-10 md:mt-0 flex flex-col items-center">
+            {/* הילה קרה (דקורטיבית — לא לוכדת קליקים) */}
+            <div
+              className="pointer-events-none absolute inset-0 flex items-center justify-center"
+              aria-hidden
+            >
+              <div className="w-[78%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(190,235,222,0.6),rgba(127,209,185,0.18)_45%,transparent_68%)] blur-2xl" />
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/product/portion-3q.webp"
-              alt="מנת ספירולינה טרייה-קפואה של SimpliiGood"
-              className="relative w-[80%] max-w-[340px] md:w-full md:max-w-[440px] drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)]"
-            />
+
+            {/* המנה + צל קרקע שנושם יחד עם הריחוף */}
+            <div className="relative flex flex-col items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/product/portion-3q.webp"
+                alt="מנת ספירולינה טרייה-קפואה של SimpliiGood"
+                className="animate-float relative w-[62%] max-w-[260px] md:w-full md:max-w-[320px] drop-shadow-[0_20px_28px_rgba(0,0,0,0.4)]"
+              />
+              <div
+                className="animate-float-shadow -mt-1 h-3 w-[52%] rounded-[50%] bg-black/45 blur-md"
+                aria-hidden
+              />
+            </div>
+
+            {/* כיתוב — מבהיר שזו מנה טרייה-קפואה, לא סתם קובייה */}
+            <span className="relative mt-5 inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/15 rounded-full px-4 py-1.5 text-[12px] font-bold text-white/90 backdrop-blur-sm">
+              <span aria-hidden>🧊</span>
+              מנה אחת = ספירולינה טרייה-קפואה
+            </span>
           </div>
         </div>
       </header>
@@ -179,6 +198,11 @@ export default function Home() {
           </a>
           <p className="text-[12px] text-brand-soft mt-2">בחינם · מתחילים היום · אפשר להסיר בכל עת</p>
         </div>
+      </section>
+
+      {/* ===== מה זוכים באתגר (מפת פרסים) ===== */}
+      <section className="px-4 pt-7 md:mx-4">
+        <RewardsRoadmap />
       </section>
 
       {/* ===== 3 דברים שחייבים לדעת ===== */}

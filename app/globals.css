@@ -41,12 +41,24 @@
   pointer-events: none;
 }
 
+/* ===== מנת המוצר — ריחוף עדין ב-hero ===== */
+@keyframes float-portion {
+  0%, 100% { transform: translateY(0) rotate(-0.6deg); }
+  50% { transform: translateY(-14px) rotate(0.6deg); }
+}
+@keyframes float-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.5; }
+  50% { transform: scaleX(0.8); opacity: 0.3; }
+}
+.animate-float { animation: float-portion 5.5s ease-in-out infinite; will-change: transform; }
+.animate-float-shadow { animation: float-shadow 5.5s ease-in-out infinite; will-change: transform, opacity; }
+
 /* ===== bottom sheet ===== */
 @keyframes sheet-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .sheet-enter { animation: sheet-up 0.28s cubic-bezier(0.2, 0.9, 0.3, 1); }
 
 @media (prefers-reduced-motion: reduce) {
-  .confetti-piece, .sheet-enter { animation: none; }
+  .confetti-piece, .sheet-enter, .animate-float, .animate-float-shadow { animation: none; }
 }
 
 html { scroll-behavior: smooth; }
