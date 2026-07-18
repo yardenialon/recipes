@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { milestoneStatus, type MilestoneStatus } from "@/lib/rewards";
+import { milestoneStatus, nextMilestone, type MilestoneStatus } from "@/lib/rewards";
 import { MilestoneIcon } from "./MilestoneIcons";
 
 /** כפתור העתקת קוד קופון (מוצג רק כשאבן-הדרך הושגה, במצב "live") */
@@ -103,17 +103,30 @@ export default function RewardsRoadmap({
   const items = milestoneStatus(days);
   const live = variant === "live";
 
+  // נאדג' "הפרס הבא" — כמה ימים נותרו לאבן-הדרך הבאה שטרם הושגה
+  const next = live ? nextMilestone(days) : null;
+  const daysToNext = next ? next.day - days : 0;
+
   return (
     <div className="bg-white rounded-card shadow-card border border-brand-line/70 p-5">
       <div className="flex items-center gap-2.5 mb-1">
         <span className="text-xl" aria-hidden>🎁</span>
         <h3 className="text-lg font-black text-brand-green">מה זוכים באתגר</h3>
       </div>
-      <p className="text-[12.5px] text-brand-soft mb-4 leading-snug">
-        {live
-          ? "כל יום מקרב אותך לפרס הבא. הקודים נפתחים אוטומטית."
-          : "כל יום של מנה ירוקה מקרב אתכם לפרס — עד ₪100 מתנה."}
-      </p>
+      {live && next ? (
+        <div className="mb-4 bg-brand-mint rounded-btn px-3.5 py-2 flex items-center gap-2">
+          <span className="text-base" aria-hidden>🔥</span>
+          <span className="text-[13px] font-bold text-brand-green">
+            {daysToNext === 1 ? "עוד יום אחד" : `עוד ${daysToNext} ימים`} ל{next.title}
+          </span>
+        </div>
+      ) : (
+        <p className="text-[12.5px] text-brand-soft mb-4 leading-snug">
+          {live
+            ? "סיימת את כל אבני-הדרך — כל הכבוד! 🏆"
+            : "כל יום של מנה ירוקה מקרב אתכם לפרס — עד ₪100 מתנה."}
+        </p>
+      )}
 
       <ol className="relative">
         {items.map((m, i) => (

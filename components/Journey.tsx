@@ -8,6 +8,7 @@ import { currentPlanDay, recipeForDay } from "@/lib/plan";
 import SubscribeCard from "./SubscribeCard";
 import UploadCard from "./UploadCard";
 import RewardsRoadmap from "./RewardsRoadmap";
+import SocialProof from "./SocialProof";
 import { RecipePhoto } from "./RecipeCard";
 
 /** המתכון של היום — ה-CTA המרכזי: מוביל ישר למתכון עם זרימת "הכנתי" */
@@ -210,6 +211,7 @@ export default function Journey() {
             <StartCard />
           )}
 
+          <SocialProof className="mt-3" />
           <SubscribeCard />
           <div className="mt-3">
             <RewardsRoadmap days={p.daysCompleted} variant="live" />
