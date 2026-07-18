@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LEVELS, Level, RECIPES, Recipe, WHATSAPP_LINK } from "@/lib/recipes";
 import RecipeCard from "./RecipeCard";
 import RecipeSheet from "./RecipeSheet";
@@ -9,6 +9,21 @@ export default function RecipeExplorer() {
   const [level, setLevel] = useState<Level>(1);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<Recipe | null>(null);
+
+  // deep link: /?recipe=<slug> (מהודעת ה-WhatsApp היומית) פותח ישר את המתכון
+  useEffect(() => {
+    try {
+      const slug = new URLSearchParams(window.location.search).get("recipe");
+      if (!slug) return;
+      const hit = RECIPES.find((r) => r.slug === slug);
+      if (hit) {
+        setOpen(hit);
+        document.getElementById("recipes")?.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch {
+      /* noop */
+    }
+  }, []);
 
   const results = useMemo(() => {
     const q = query.trim();
