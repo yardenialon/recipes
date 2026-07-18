@@ -6,6 +6,7 @@
 - `{first_name}` = תג המיזוג של Flashy לשם (התאם לתחביר של Flashy — לרוב `{{first_name}}`). אם אין שם — כתוב fallback ידידותי.
 - החלף `challenge.simpliigood.co.il` בכתובת האתר החיה שלך אם הדומיין עדיין לא מחובר.
 - כל הודעה קצרה בכוונה — נוחה לקריאה בנייד.
+- **הלינק בכל יום הוא deep-link ישיר למתכון של אותו יום** (`/?recipe=<slug>`): לחיצה פותחת מיד את המתכון עם כפתור "הכנתי" — הכי פחות חיכוך מהתזכורת ועד סימון הרצף.
 
 ---
 
@@ -15,91 +16,91 @@
 גביע יוגורט + 2 מנות SimpliiGood מופשרות. מערבבים. זהו.
 טעם עדין, צבע מהמם, וכל הברזל וה-B12 בפנים.
 סמן/י "הכנתי!" ותפתח/י את הרצף 👇
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=green-yogurt
 
 ### יום 2 — הכי מרענן ☀️
 בוקר טוב {first_name}!
 היום *מיץ תפוזים ירוק*: מנה מופשרת בתוך כוס מיץ תפוזים, מערבבים היטב.
 מתוק, כתום-ירוק, והילדים מתים על זה.
 2 מתוך 14 — הרצף גדל 🔥
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=orange-spirulina
 
 ### יום 3 — דלק לאימון 💪
 {first_name}, מעלים הילוך:
 *שייק חלבון בננה* — 2 מנות + בננה + חופן בייבי תרד + כוס חלב שקדים לבלנדר.
 חלבון מלא, BCAA, וטעם של מילקשייק.
 3 ימים ברצף, אלופ/ה 🔥🔥🔥
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=protein-banana-shake
 
 ### יום 4 — קרמי וטעים 🥑
 בוקר טוב {first_name}!
 *ספירולינה אבוקדו*: מועכים חצי אבוקדו עם מנה מופשרת, לימון, מלח ופלפל.
 מושלם על לחם או ישר עם כפית.
 עוד יום, עוד ניצחון קטן 💚
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=avocado-spirulina
 
 ### יום 5 — מטבל של 10 שניות 🫓
 {first_name}, היום קליל:
 *חומוס ירוק* — מנה מופשרת מעורבבת ב-3 כפות חומוס, טפטוף שמן זית ופפריקה.
 חלבון, ברזל וסיבים — בלי מאמץ.
 5 ימים! אתה/את בקצב מעולה 🙌
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=green-hummus
 
 ### יום 6 — יום אינסטגרם 📸
 בוקר טוב {first_name}!
 היום *בודהה בול* — בננה קפואה + 6-8 תותים קפואים + 2 מנות + חצי כוס חלב, לבלנדר, מקשטים בפירות.
 יוצא יפה במיוחד — **צלמו ושתפו בסטורי, תייגו @simpliigood** 💚
-ואפשר גם להעלות לפיד שלנו ולצבור נקודות 👇
-https://challenge.simpliigood.co.il/journey
+ואחרי "הכנתי" אפשר להעלות תמונה לפיד ולצבור נקודות 👇
+https://challenge.simpliigood.co.il/?recipe=buddha-bowl
 
 ### יום 7 — שבוע שלם! 🏆
 {first_name}, עשית שבוע שלם — חצי מהדרך! 🎉
 היום *טחינה ירוקה* — 2 מנות + חצי כוס טחינה גולמית + שום + לימון + מים, לבלנדר.
 מושלמת על הכל, מהסלט ועד הפלאפל.
 תג חדש מחכה לך במסע — בוא/י לראות 👇
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=fresh-tahini
 
 ### יום 8 — אפגרייד לצהריים 🐟
 בוקר טוב {first_name}!
 טיפ מנצח: ב*סלט טונה* — החליפו את המיונז במנה מופשרת.
 נוגדי חמצון וחלבון צמחי, בלי לשנות את הטעם שאוהבים.
 8/14 — ממשיכים חזק 🔥
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=tuna-spirulina
 
 ### יום 9 — הסלט מקבל שדרוג 🥗
 {first_name}, היום *רוטב סלט ירוק*:
 2 מנות + מיץ מחצי תפוז + מחצי לימון + כף דבש + כפית חרדל + שמן זית — לנער בצנצנת.
 כל סלט פתאום מעניין.
 עוד יום ברצף 💚
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=salad-dressing
 
 ### יום 10 — מכינים מהערב 🌙
 היי {first_name}! היום קצת קסם:
 *פודינג צ'יה ירוק* — מערבבים 2 מנות + בננה מעוכה + 2 כפות צ'יה + חלב צמחי, ללילה במקרר.
 מתעוררים לארוחת בוקר מוכנה 😌
 10 ימים! מרשים ברצינות 🔥
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=chia-pudding
 
 ### יום 11 — ארוחת ערב בדקות 🍝
 בוקר טוב {first_name}!
 *פסטו ספירולינה* — בזיליקום + 2 מנות + שמן זית + צנוברים + שום, פולסים במעבד.
 על לחם, בסלט פסטה קר, או כמטבל.
 11/14 — הישורת האחרונה מתקרבת 💪
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=green-pesto
 
 ### יום 12 — פינוק קפוא 🍦
 {first_name}, מגיע לך פינוק:
 *חטיפי יוגורט קפואים* — מערבבים 2 מנות ביוגורט, מורחים על נייר אפייה, מפזרים תוספות, מקפיאים ופורסים.
 הילדים (וגם אתם) יאהבו.
 12 ימים ברצף — וואו 🔥
-https://challenge.simpliigood.co.il/journey
+https://challenge.simpliigood.co.il/?recipe=yogurt-bark
 
 ### יום 13 — מה היה הכי טעים? 💚
 {first_name}, כמעט סיימנו!
-איזה מתכון היה המנצח שלך? 🤔
-**שתפו תמונה של המנה האהובה בסטורי ותייגו @simpliigood** — ואולי תופיעו בפיד הקהילה שלנו.
+היום *יוגורט פרו* — יוגורט + 2 מנות + גרנולה + סילן. 22 גרם חלבון של אלופים.
+ואיזה מתכון היה המנצח שלך השבוע? **שתפו תמונה בסטורי ותייגו @simpliigood** — אולי תופיעו בפיד הקהילה שלנו.
 מחר היום האחרון… תישאר/י איתנו 👇
-https://challenge.simpliigood.co.il/feed
+https://challenge.simpliigood.co.il/?recipe=protein-yogurt-pro
 
 ### יום 14 — סיימת! 🏆🎉
 {first_name}, עשית 14 יום שלמים — הפכת את המנה היומית להרגל 💚

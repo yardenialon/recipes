@@ -4,9 +4,42 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CHALLENGE_DAYS, EMPTY_PROGRESS, getDeviceId, type Progress } from "@/lib/challenge";
 import { SHOP_LINK } from "@/lib/recipes";
+import { currentPlanDay, recipeForDay } from "@/lib/plan";
 import SubscribeCard from "./SubscribeCard";
 import UploadCard from "./UploadCard";
 import RewardsRoadmap from "./RewardsRoadmap";
+import { RecipePhoto } from "./RecipeCard";
+
+/** המתכון של היום — ה-CTA המרכזי: מוביל ישר למתכון עם זרימת "הכנתי" */
+function TodayRecipeCard({ days }: { days: number }) {
+  const day = currentPlanDay(days);
+  const recipe = recipeForDay(day);
+  if (!recipe) return null;
+  return (
+    <Link
+      href={`/?recipe=${recipe.slug}`}
+      className="block bg-brand-green text-white rounded-card shadow-card overflow-hidden transition-transform active:scale-[0.98]"
+    >
+      <div className="flex items-stretch gap-3 p-3">
+        <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
+          <RecipePhoto recipe={recipe} className="w-24 h-24" />
+        </div>
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="text-[11px] font-black text-brand-yellow tracking-wide">
+            המתכון של היום · יום {day}/{CHALLENGE_DAYS}
+          </div>
+          <div className="font-black text-[17px] leading-tight mt-0.5">{recipe.name}</div>
+          <div className="text-[12px] text-[#BFD4D2] mt-0.5">
+            {recipe.timeLabel} · {recipe.meal}
+          </div>
+          <span className="inline-flex items-center gap-1 mt-2 self-start bg-brand-yellow text-brand-green font-extrabold text-[13px] rounded-btn px-4 py-1.5">
+            להכין ולסמן ✓
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 function Stat({ emoji, value, label }: { emoji: string; value: number; label: string }) {
   return (
@@ -123,6 +156,12 @@ export default function Journey() {
         <div className="text-center text-brand-soft py-20">טוען את המסע…</div>
       ) : (
         <div className="px-4 -mt-5">
+          {!finished && (
+            <div className="mt-6 mb-3">
+              <TodayRecipeCard days={p.daysCompleted} />
+            </div>
+          )}
+
           {hasJourney ? (
             <>
               {/* רצף */}
