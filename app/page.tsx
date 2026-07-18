@@ -3,6 +3,7 @@ import RecipeExplorer from "@/components/RecipeExplorer";
 import Faq from "@/components/Faq";
 import SubscribeCard from "@/components/SubscribeCard";
 import RewardsRoadmap from "@/components/RewardsRoadmap";
+import SocialProof from "@/components/SocialProof";
 import { RECIPES, WHATSAPP_LINK, SHOP_LINK, STORE_LOCATOR_LINK } from "@/lib/recipes";
 
 /** Schema.org Recipe markup — נכס ה-SEO המרכזי של פאזה 1 */
@@ -160,6 +161,11 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* ===== הוכחה חברתית (מוצג רק כשיש מסה קריטית אמיתית) ===== */}
+      <section className="px-4 pt-5 md:mx-4">
+        <SocialProof />
+      </section>
 
       {/* ===== איך מצטרפים לאתגר ===== */}
       <section className="px-4 pt-6 md:mx-4">
